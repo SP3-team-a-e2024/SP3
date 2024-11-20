@@ -1,0 +1,28 @@
+@startuml
+
+object User
+object FileReader
+object TextUI
+object Menu
+object Media
+object Movies
+object Series
+object Seasons
+object Episodes
+object Settings
+
+Menu *-- Media
+Menu *-- User
+Menu *-- TextUI
+Menu *-- FileReader
+
+Media <|-- Movies
+Media <|-- Series
+
+Series *-- Seasons
+
+Seasons *-- Episodes
+
+User *-- Settings
+
+@enduml
