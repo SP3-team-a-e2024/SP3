@@ -1,0 +1,96 @@
+@startuml
+
+Class StreamingService
+{
+- StartMenu startMenu
+- Set<Media> media
++ searchMovie()
++ searchCategory()
+- displayMenu()
+- setup()
+- loadMedia()
+}
+package "util" {
+    Class FileReader {
+    - FileReader()
+    + List<String> readUserData(String path)
+    + void saveData(List<User> users, String path)
+    + String[] readBoardData(String path, int length).
+    }
+
+    Class TextUI {
+    - TextUI()
+    - Scanner scanner
+    + void displayMsg(String s)
+    + int promptNumeric(String msg)
+    + String promptText(String msg)
+    + int promptChoice(String msg, List<String> list)
+    + boolean promptBinary(String msg )
+    }
+}
+
+Class StartMenu{
+- login()
+- signUp()
+}
+
+Class User {
+- Set<Media> watchedMedia
+- Set<Media> savedMedia
++ getWatchedMedia()
++ addWatchedMedia()
++ getSavedMedia()
++ addSavedMedia()
++ removeSavedMedia()
+}
+
+Enum MovieCategories {
+
+}
+
+Enum SeriesCategories {
+}
+
+Abstract Media {
+- String name
+- float rating
+- int releaseYear
+- Enum categories
+
++ getName()
++ getRating()
++ getReleaseYear()
++ getCategories()
++ equals()
+}
+
+Interface Playable {
++ playMedia()
+}
+
+Class Movie extends Media implements Playable {
+
+}
+
+Class Series extends Media {
+- Set<Season> seasons
+}
+
+Class Season {
+- Set<Episode> episodes
+}
+
+Class Episode implements Playable {
+- int episodeNumber
++ getEpisodeNumber()
+}
+
+StreamingService *-- Media
+StreamingService *-- User
+StreamingService *-- StartMenu
+
+Series *-- Season
+
+Season *-- Episode
+
+@enduml
