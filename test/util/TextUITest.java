@@ -168,7 +168,7 @@ class TextUITest {
         List<String> options = new ArrayList<>(Arrays.asList(option1, option2));
         int limit = 1;
         String message = "Select option: ";
-        when(mockScanner.nextLine()).thenReturn(option1);
+        when(mockScanner.nextLine()).thenReturn("1");
 
         // Act
         List<String> actual = TextUI.promptChoice(options, limit, message);
@@ -185,7 +185,7 @@ class TextUITest {
         List<String> options = new ArrayList<>(Arrays.asList(option1, option2));
         int limit = 1;
         String message = "Select option: ";
-        when(mockScanner.nextLine()).thenReturn("invalid", option1);
+        when(mockScanner.nextLine()).thenReturn("invalid", "3", "1");
 
         // Act
         List<String> actual = TextUI.promptChoice(options, limit, message);

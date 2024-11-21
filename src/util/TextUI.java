@@ -46,15 +46,13 @@ public class TextUI {
 
     public static List<String> promptChoice(List<String> options, int limit, String msg){
         List<String> choices = new ArrayList<>();
-        int count = 1;
         displayList(options, msg);
 
         while(choices.size() < limit){
-            String choice = promptText("");
+            int choice = promptNumeric("");
 
-            if (options.contains(choice)) {
-                choices.add(choice);
-                count++;
+            if (choice > 0 && choice <= options.size()) {
+                choices.add(options.get(choice-1));
             }
         }
         return choices;
