@@ -4,6 +4,9 @@ Class StreamingService
 {
 - StartMenu startMenu
 - Set<Media> media
+- User currentUser
+- private TextUI ui
+- private FileIO io
 + searchMovie()
 + searchCategory()
 - displayMenu()
@@ -88,6 +91,8 @@ Class Episode implements Playable {
 StreamingService *-- Media
 StreamingService *-- User
 StreamingService *-- StartMenu
+StreamingService *-- TextUI
+StreamingService *-- FileReader
 
 Series *-- Season
 
