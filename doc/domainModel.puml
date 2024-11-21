@@ -1,0 +1,23 @@
+@startuml
+
+object StreamingService
+object StartMenu
+object User
+object Media
+object Movie
+object Series
+object Season
+object Episode
+
+StreamingService *-- Media
+StreamingService *-- User
+StreamingService *-- StartMenu
+
+Media <|-- Series
+Media <|-- Movie
+
+Series *-- Season
+
+Season *-- Episode
+
+@enduml
