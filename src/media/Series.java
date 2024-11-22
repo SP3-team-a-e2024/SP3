@@ -1,7 +1,8 @@
 package media;
 
+import java.util.Set;
 import java.util.TreeSet;
 
 public class Series extends Media {
-    private TreeSet<Season> seasons  = new TreeSet<>();
+    private Set<Season> seasons  = new TreeSet<>();
 }
