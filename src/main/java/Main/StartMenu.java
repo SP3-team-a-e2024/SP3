@@ -1,8 +1,9 @@
-import user.User;
-import util.TextUI;
+package Main;
 
 import java.util.ArrayList;
 import java.util.List;
+import user.User;
+import util.TextUI;
 
 public class StartMenu {
 
@@ -14,7 +15,7 @@ public class StartMenu {
 
         User currentUser = null;
 
-        switch (options.getFirst()) {
+        switch (options.get(0)) {
             case "log in":
                 currentUser = login();
                 break;

@@ -1,7 +1,7 @@
-//bare for at fjerne compiller fejl
+package Main;//bare for at fjerne compiller fejl
+import media.Media;
+import user.User;
 import util.TextUI;
-import media.*;
-import user.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -39,8 +39,7 @@ public class StreamingService {
         options.add("See previous movies watched");
         options.add("See saved movies");
         options = TextUI.promptChoice(options,1,"What do you want to do");
-
-        switch (options.getFirst()) {
+        switch (options.get(0)) {
             case "Search movie":
                 searchMovie();
                 break;
