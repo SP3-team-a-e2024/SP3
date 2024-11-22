@@ -1,60 +1,70 @@
 //bare for at fjerne compiller fejl
+import util.TextUI;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 
+import java.util.List;
 import java.util.Set;
 
 public class StreamingService {
 
     private StartMenu startMenu;
     //hashset is not certain
-    private Set<Media> media = new HashSet<>();
+    private Set<Media> media = new HashSet<Media>();
     private User currentUser;
     //copied from monopoly
-    private TextUI ui;
-    private FileIO io;
+
 
     public void StreamingService() {
         //copied from monopoly
-        this.ui = new TextUI();
-        this.io = new FileReader();
+
     }
 
-    //dummy, will be used to find a movie
-    public void searchMovie(){}
-    //dummy, will be used to find movies in a category
-    public void searchCategory(){}
+
+    public void searchMovie(){
+            }
+
+    public void searchCategory(){
+
+    }
 
     private void displayMenu(){
+        TextUI.displayMsg("Welcome to notflix");
+        List<String> options = new ArrayList();
+        options.add("Search movie");
+        options.add("Search categories");
+        options.add("See previous movies watched");
+        options.add("See saved movies");
+        options = TextUI.promptChoice(options,1,"What do you want to do");
+
+        switch (options.getFirst()) {
+            case "Search movie":
+                searchMovie();
+                break;
+            case "Search categories":
+                searchCategory();
+                break;
+            case "See previous movies watched":
+                //missing function. in user?
+                break;
+            case "See saved movies":
+                //missing function. in user?
+                break;
+        }
 
     }
 
-    //i assume it will get data for the Set of media? or running methods from the startmenu class?
     private void setup(){
-        //
-        // ikke sikker om placering
-        // also this is fucking stupid way to do so
-        // should be wrapped up in TextUi as a function
+        //if theres no user logged in, it will go to the login page
         if (currentUser == null){
-            ui.displayMsg("Theres no user logged in");
-            ui.displayMsg("1) log in");
-            ui.displayMsg("2) sign up");
-            int choice = ui.promptBinary("Choose an option");
-            while (choice != 1 || choice != 2){
-                choice = ui.promptBinary("please choose a valid option");
-            }
-            switch (choice){
-                case 1:
-                    startMenu.login();
-                    break;
-                case 2:
-                    startMenu.signUp();
-                    break;
-            }
+            currentUser = startMenu.loginMenuLogic();
+            //if something somehow goes wrong it will double check that there is a user
             setup();
             return;
         }
+        //if there is a user logged in it will start the menu
         else{
-            ui.displayMsg("Welcome to notflix");
             displayMenu();
         }
 
