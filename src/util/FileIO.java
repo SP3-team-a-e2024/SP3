@@ -50,12 +50,12 @@ public class FileIO {
                 try {
                     Scanner scan = new Scanner(file);
                     if (scan.hasNextLine()) {
-                        scan.nextLine(); // Spring headeren over
+                        scan.nextLine();
                     }
                     while (scan.hasNextLine()) {
                         String line = scan.nextLine();
                         String[] lineSplitter = line.split(";");
-                        mediaList.add(lineSplitter); // Tilføj hver linje som en array af strings
+                        mediaList.add(lineSplitter);
                     }
                     scan.close();
                 } catch (FileNotFoundException e) {
