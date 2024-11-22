@@ -4,6 +4,7 @@ Class StreamingService
 {
 - StartMenu startMenu
 - Set<Media> media
+- User currentUser
 + searchMovie()
 + searchCategory()
 - displayMenu()
@@ -30,8 +31,9 @@ package "util" {
 }
 
 Class StartMenu{
-- login()
-- signUp()
++ User loginMenuLogic()
+- User login()
+- void signUp()
 }
 
 Class User {
@@ -88,6 +90,7 @@ Class Episode implements Playable {
 StreamingService *-- Media
 StreamingService *-- User
 StreamingService *-- StartMenu
+
 
 Series *-- Season
 
