@@ -1,3 +1,4 @@
+import java.util.Set;
 
 public abstract class Media {
 
@@ -5,6 +6,7 @@ public abstract class Media {
     private float rating;
     private int releaseYear;
     private Enum categories;
+
 
 
     public abstract String getName();
@@ -16,7 +18,7 @@ public abstract class Media {
     public abstract int getReleaseYear();
 
 
-    public abstract Enum getCategories();
+    public abstract Set<Enum> getCategories();
 
     @Override
     public abstract boolean equals(Object o);
