@@ -1,3 +1,5 @@
+package media;
+
 import java.util.Set;
 
 public abstract class Media {
@@ -5,9 +7,14 @@ public abstract class Media {
     private String name;
     private float rating;
     private int releaseYear;
-    private Enum categories;
+    private Set<Enum> categories;
 
-
+    public Media(String name, float rating, int releaseYear, Set<?> categories) {
+        this.name = name;
+        this.rating = rating;
+        this.releaseYear = releaseYear;
+        this.categories = (Set<Enum>) categories;
+    }
 
     public abstract String getName();
 
