@@ -1,5 +1,7 @@
 //bare for at fjerne compiller fejl
 import util.TextUI;
+import media.*;
+import user.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;

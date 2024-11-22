@@ -1,3 +1,4 @@
+import user.User;
 import util.TextUI;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class StartMenu {
         options.add("Sign up");
         options = TextUI.promptChoice(options,1,"Theres no user logged in");
 
-        User currentUser = new User();
+        User currentUser = null;
 
         switch (options.getFirst()) {
             case "log in":
@@ -22,16 +23,16 @@ public class StartMenu {
                 break;
         }
 
-        if (User = null){
+        if (currentUser == null){
             return loginMenuLogic();
         }
-        return User;
+        return currentUser;
     }
 
 
     private User login() {
         //dummy
-        return new user();
+        return null;
     }
     private void signUp(){
     }
