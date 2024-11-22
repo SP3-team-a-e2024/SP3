@@ -43,7 +43,25 @@ public class FileIO {
                 System.out.println("something went wrong when writing to file");
             }
         }
-        public void readMedia(){
 
-        }
+            public static List<String[]> readMedia(String path) {
+                List<String[]> mediaList = new ArrayList<>();
+                File file = new File(path);
+                try {
+                    Scanner scan = new Scanner(file);
+                    if (scan.hasNextLine()) {
+                        scan.nextLine(); // Spring headeren over
+                    }
+                    while (scan.hasNextLine()) {
+                        String line = scan.nextLine();
+                        String[] lineSplitter = line.split(";");
+                        mediaList.add(lineSplitter); // Tilføj hver linje som en array af strings
+                    }
+                    scan.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("Media file not found: " + path);
+                }
+                return mediaList;
+            }
+
 }
