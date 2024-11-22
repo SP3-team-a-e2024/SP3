@@ -1,3 +1,5 @@
+package main.java;
+
 import media.Media;
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,5 @@
 import enums.SeriesCategories;
+import main.java.User;
 import media.Media;
 import media.Series;
 import org.junit.jupiter.api.Test;
@@ -14,15 +15,15 @@ class UserTest {
     void getWatchedMedia() {
         User user = new User("Alissa", "123");
         Set<SeriesCategories> categories = new HashSet<>();
-        Set<Media> WatchedMedia = new HashSet<>();
+        Set<Media> watchedMedia = new HashSet<>();
         Media series1 = new Series("Game of Thrones",9, 2010, categories);
 
-        WatchedMedia.add(series1);
+        watchedMedia.add(series1);
 
         Set<Media> result = user.getWatchedMedia();
 
-        assertNotNull(WatchedMedia,"The list set should not be null");
-        assertTrue(WatchedMedia.contains(series1), "The list should contain series1");
+        assertNotNull(watchedMedia,"The list set should not be null");
+        assertTrue(watchedMedia.contains(series1), "The list should contain series1");
 
     }
 
