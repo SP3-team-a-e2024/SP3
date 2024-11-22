@@ -1,4 +1,4 @@
-package main.java;
+package user;
 
 import media.Media;
 import java.util.HashSet;

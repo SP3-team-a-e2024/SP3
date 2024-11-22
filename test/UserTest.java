@@ -1,5 +1,5 @@
 import enums.SeriesCategories;
-import main.java.User;
+import user.User;
 import media.Media;
 import media.Series;
 import org.junit.jupiter.api.Test;
