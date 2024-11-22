@@ -1,7 +1,5 @@
 package media;
 
-import enums.SeriesCategories;
-
 import java.util.Set;
 
 public abstract class Media {

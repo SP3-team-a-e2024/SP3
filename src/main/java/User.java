@@ -1,5 +1,4 @@
 import media.Media;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -73,6 +72,4 @@ public class User {
         savedMedia.remove(media);
         System.out.println("You just removed " + media + " from the list");
     }
-
-
 }
