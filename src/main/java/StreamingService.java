@@ -55,6 +55,7 @@ public class StreamingService {
         }
         else{
             ui.displayMsg("Welcome to notflix");
+            displayMenu();
         }
 
     }
