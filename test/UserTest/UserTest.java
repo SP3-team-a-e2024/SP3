@@ -1,11 +1,12 @@
 package UserTest;
 
-import enums.SeriesCategories;
+import enums.Categories;
 import user.User;
 import media.Media;
 import media.Series;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,25 +17,28 @@ class UserTest {
     @Test
     void getWatchedMedia() {
         User user = new User("Alissa", "123");
-        Set<SeriesCategories> categories = new HashSet<>();
+        Set<Categories> categories = new HashSet<>();
         Set<Media> watchedMedia = new HashSet<>();
-        Media series1 = new Series("Game of Thrones",9, 2010, categories);
+        ArrayList<Integer> seasons = new ArrayList<>();
+        ArrayList<Integer> episodes = new ArrayList<>();
+        Media series = new Series("Game of Thrones",9, new int[] {2010}, categories,seasons,episodes);
 
-        watchedMedia.add(series1);
+        watchedMedia.add(series);
 
         Set<Media> result = user.getWatchedMedia();
 
         assertNotNull(watchedMedia,"The list set should not be null");
-        assertTrue(watchedMedia.contains(series1), "The list should contain series1");
+        assertTrue(watchedMedia.contains(series), "The list should contain series1");
 
     }
 
     @Test
     void addWatchedMedia() {
         User user = new User("Alissa", "123");
-        Set<SeriesCategories> categories = new HashSet<>();
-        Media series = new Series("Game of Thrones",9, 2010, categories);
-
+        Set<Categories> categories = new HashSet<>();
+        ArrayList<Integer> seasons = new ArrayList<>();
+        ArrayList<Integer> episodes = new ArrayList<>();
+        Media series = new Series("Game of Thrones",9, new int[] {2010}, categories,seasons,episodes);
         user.addWatchedMedia(series);
         Set<Media> watchedMedia = user.getWatchedMedia();
         assertTrue(watchedMedia.contains(series), "The list should contain series");
@@ -44,9 +48,12 @@ class UserTest {
     void getSavedMedia() {
         // Arrange
         Set<Media> savedMedia = new HashSet<>();
-        Set<SeriesCategories> categories = new HashSet<>();
-        categories.add(SeriesCategories.FANTASY);
-        Media series = new Series("Game of Thrones", 10f, 2011, categories);
+        Set<Categories> categories = new HashSet<>();
+        categories.add(Categories.FANTASY);
+        ArrayList<Integer> seasons = new ArrayList<>();
+        ArrayList<Integer> episodes = new ArrayList<>();
+        Media series = new Series("Game of Thrones",9, new int[] {2010}, categories,seasons,episodes);
+
         savedMedia.add(series);
         User user = new User("Alissa", "123");
 
@@ -61,10 +68,10 @@ class UserTest {
     @Test
     void addSavedMedia() {
         User user = new User("Alissa", "123");
-        Set<SeriesCategories> categories = new HashSet<>();
-        Series series = new Series("Game of Thrones",9, 2010, categories);
-
-
+        Set<Categories> categories = new HashSet<>();
+        ArrayList<Integer> seasons = new ArrayList<>();
+        ArrayList<Integer> episodes = new ArrayList<>();
+        Media series = new Series("Game of Thrones",9, new int[] {2010}, categories,seasons,episodes);
         user.addSavedMedia(series);
         Set<Media> savedMedia = user.getSavedMedia();
         assertTrue(savedMedia.contains(series), "The list should contain series");
@@ -74,15 +81,14 @@ class UserTest {
     @Test
     void removeSavedMedia() {
         User user = new User("Alissa", "123");
-        Set<SeriesCategories> categories = new HashSet<>();
-        Series series = new Series("Game of Thrones",9, 2010, categories);
-
+        Set<Categories> categories = new HashSet<>();
+        ArrayList<Integer> seasons = new ArrayList<>();
+        ArrayList<Integer> episodes = new ArrayList<>();
+        Media series = new Series("Game of Thrones",9, new int[] {2010}, categories,seasons,episodes);
         user.addSavedMedia(series);
         Set<Media> savedMedia = user.getSavedMedia();
         assertTrue(savedMedia.contains(series),"The saved Media should contain series");
-
         user.removeSavedMedia(series);
         assertFalse(savedMedia.contains(series), "The savedMedia should not contain series");
-
     }
 }

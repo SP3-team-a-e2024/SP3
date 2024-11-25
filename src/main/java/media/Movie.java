@@ -1,19 +1,18 @@
 package media;
 import Main.Playable;
 import enums.Categories;
+
 import java.util.Set;
 
 public class Movie extends Media implements Playable {
-    public Movie(String name, float rating, int releaseYear, Set<Categories> categories) {
+    public Movie(String name, float rating, int[] releaseYear, Set<Categories> categories) {
         super(name, rating, releaseYear, categories);
     }
 
     public void playMedia(){
 
     }
-    public String getName(){
-        return "";
-    }
+    public String getName(){return ""; }
     public float getRating(){
         return 0;
     }

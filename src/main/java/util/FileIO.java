@@ -13,6 +13,8 @@ import java.util.*;
 
 public class FileIO {
 
+    private FileIO(){};
+
     public static Map<String, String> readUserCredentials(String path) {
         Map<String, String> data = new HashMap<>();
         File file = new File(path);
@@ -50,7 +52,7 @@ public class FileIO {
     }
 
     public static Set<Media> readMedia(String path) {
-        Set<Media> mediaSet = new TreeSet<>();
+        Set<Media> mediaSet = new HashSet<>();
         File file = new File(path);
         try {
             Scanner scan = new Scanner(file);
@@ -61,14 +63,47 @@ public class FileIO {
                 Set<Categories> enumCategories = mapCategoriesToEnum(categoriesSplitter);
 
                 if (lineSplitter.length > 4) {
-                    String[] Seasons = (lineSplitter[4]).split(",");
-                    for (String season : Seasons) {
-                        
+                    String[] data = (lineSplitter[4]).split(",");
+                    ArrayList<Integer> seasons = new ArrayList<>();
+                    ArrayList<Integer> episodes = new ArrayList<>();
+                    for (String d : data) {
+                        String [] temp = d.split("-");
+                        seasons.add(Integer.parseInt(temp[0].trim()));
+                        episodes.add(Integer.parseInt(temp[1].trim()));
                     }
-                    mediaSet.add(new Series(lineSplitter[0], Float.parseFloat(lineSplitter[3].trim()), Integer.parseInt(lineSplitter[1].trim()), enumCategories));
 
-                } else {
-                    mediaSet.add(new Movie(lineSplitter[0], Float.parseFloat(lineSplitter[3].trim()), Integer.parseInt(lineSplitter[1].trim()), enumCategories));
+                    data = (lineSplitter[1].split("-"));
+                    int[] releaseYears = new int[data.length];
+                    for (int i = 0; i < data.length; i++) {
+                        if (data[i].isBlank() || data[i].isEmpty()) continue;
+                        releaseYears[i] = Integer.parseInt(data[i].trim());
+                    }
+                    Media series = new Series(
+                            lineSplitter[0], // Name
+                            Float.parseFloat(lineSplitter[3].trim().replace(",",".")), // Rating
+                            releaseYears, // Release year
+                            enumCategories, // Categories
+                            seasons, // Season no.
+                            episodes // Episode no.
+                    );
+
+                    mediaSet.add(series);
+
+                }
+                else {
+                    String[] data = (lineSplitter[1].split("-"));
+                    int[] releaseYears = new int[data.length];
+                    for (int i = 0; i < data.length; i++) {
+                        releaseYears[i] = Integer.parseInt(data[i].trim());
+                    }
+
+                    Media movie = new Movie(
+                            lineSplitter[0], // name
+                            Float.parseFloat(lineSplitter[3].trim().replace(",",".")), // rating
+                            releaseYears, // release year
+                            enumCategories // categories
+                    );
+                    mediaSet.add(movie);
                 }
             }
             scan.close();
@@ -83,7 +118,7 @@ public class FileIO {
 
         Set<Categories> enumSet = new HashSet<>();
         for (String category : categories) {
-            enumSet.add(Categories.valueOf(category.toUpperCase()));
+            enumSet.add(Categories.valueOf(category.toUpperCase().trim().replace("-","_")));
         }
         return enumSet;
     }
