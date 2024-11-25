@@ -1,13 +1,11 @@
 package Main;//bare for at fjerne compiller fejl
+import enums.MovieCategories;
+import enums.SeriesCategories;
 import media.Media;
 import user.User;
 import util.TextUI;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class StreamingService {
 
@@ -28,11 +26,30 @@ public class StreamingService {
             }
 
     public void searchCategory(){
+        Scanner scan  = new Scanner(System.in);
 
+        System.out.println("Please enter the category you wish to search, (or press x if you wont search for a category): ");
+
+        while (true) {
+            System.out.println("Search for a category: : ");
+            String categoryName = scan.nextLine();
+
+            if(categoryName.equalsIgnoreCase("x")){
+                System.out.println("You decided not to search, closing searching... ");
+            }
+
+            try{
+                SeriesCategories seriesCategory = SeriesCategories.valueOf(categoryName.toUpperCase());
+                MovieCategories movieCategory = MovieCategories.valueOf(categoryName.toUpperCase());
+                System.out.println("Category found: " + categoryName);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Category not found, try again: " + categoryName);
+            }
+        }
     }
 
     private void displayMenu(){
-        TextUI.displayMsg("Welcome to notflix");
+        TextUI.displayMsg("Welcome to NotFlix");
         List<String> options = new ArrayList();
         options.add("Search movie");
         options.add("Search categories");
