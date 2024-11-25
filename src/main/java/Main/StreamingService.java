@@ -26,24 +26,22 @@ public class StreamingService {
             }
 
     public void searchCategory(){
-        Scanner scan  = new Scanner(System.in);
 
-        System.out.println("Please enter the category you wish to search, (or press x if you wont search for a category): ");
+        TextUI.displayMsg("Please enter the category you wish to search, (or press x if you wont search for a category): ");
 
         while (true) {
-            System.out.println("Search for a category: : ");
-            String categoryName = scan.nextLine();
+            String categoryName = TextUI.promptText("Search for a category: ");
 
             if(categoryName.equalsIgnoreCase("x")){
-                System.out.println("You decided not to search, closing searching... ");
+                TextUI.displayMsg("You decided not to search, closing searching... ");
             }
 
             try{
                 SeriesCategories seriesCategory = SeriesCategories.valueOf(categoryName.toUpperCase());
                 MovieCategories movieCategory = MovieCategories.valueOf(categoryName.toUpperCase());
-                System.out.println("Category found: " + categoryName);
+                TextUI.displayMsg("Category found: " + categoryName);
             } catch (IllegalArgumentException e) {
-                System.out.println("Category not found, try again: " + categoryName);
+                TextUI.displayMsg("Category not found, try again: " + categoryName);
             }
         }
     }
