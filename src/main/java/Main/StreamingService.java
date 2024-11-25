@@ -13,13 +13,15 @@ public class StreamingService {
 
     private StartMenu startMenu;
     //hashset is not certain
-    private Set<Media> media = new HashSet<Media>();
+    private Set<Media> media;
     private User currentUser;
-    //copied from monopoly
 
 
-    public void StreamingService() {
-        //copied from monopoly
+
+    public StreamingService() {
+        Set<Media> media = new HashSet<Media>();
+        startMenu = new StartMenu();
+        setup();
 
     }
 

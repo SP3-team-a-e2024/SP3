@@ -16,10 +16,11 @@ public class StartMenu {
         User currentUser = null;
 
         switch (options.get(0)) {
-            case "log in":
+            case "Log in":
                 currentUser = login();
                 break;
-            case "sign up":
+
+            case "Sign up":
                 signUp();
                 break;
         }
