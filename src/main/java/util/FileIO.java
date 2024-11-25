@@ -54,7 +54,7 @@ public class FileIO {
                     }
                     while (scan.hasNextLine()) {
                         String line = scan.nextLine();
-                        String[] lineSplitter = line.split(";");
+                        String[] lineSplitter = line.split(",");
                         mediaList.add(lineSplitter);
                     }
                     scan.close();
