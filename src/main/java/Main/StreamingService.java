@@ -18,7 +18,7 @@ public class StreamingService {
 
 
 
-    public void StreamingService() {
+    public StreamingService() {
         Set<Media> media = new HashSet<Media>();
         startMenu = new StartMenu();
         setup();
