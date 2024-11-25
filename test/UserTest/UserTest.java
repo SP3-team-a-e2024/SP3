@@ -1,3 +1,5 @@
+package UserTest;
+
 import enums.SeriesCategories;
 import user.User;
 import media.Media;
