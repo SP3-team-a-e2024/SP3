@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SeriesCategoriesTest {
+class CategoriesTest {
 
     @Test
     void values() {
@@ -12,7 +12,7 @@ class SeriesCategoriesTest {
         String category = "ACTION";
 
         // Act
-        Enum<SeriesCategories> actual = SeriesCategories.valueOf(category);
+        Enum<Categories> actual = Categories.valueOf(category);
 
         // Assert
         assertEquals(category, actual.name());
@@ -24,9 +24,9 @@ class SeriesCategoriesTest {
         String category = "ACTION";
 
         // Act
-        Enum<SeriesCategories> actual = SeriesCategories.valueOf(category);
+        Enum<Categories> actual = Categories.valueOf(category);
 
         // Assert
-        assertEquals(SeriesCategories.ACTION, actual);
+        assertEquals(Categories.ACTION, actual);
     }
 }

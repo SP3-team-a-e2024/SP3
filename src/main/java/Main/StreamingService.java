@@ -1,6 +1,5 @@
 package Main;//bare for at fjerne compiller fejl
-import enums.MovieCategories;
-import enums.SeriesCategories;
+import enums.Categories;
 import media.Media;
 import user.User;
 import util.TextUI;
@@ -36,8 +35,7 @@ public class StreamingService {
         }
 
         try {
-            SeriesCategories.valueOf(categoryName.toUpperCase());
-            MovieCategories.valueOf(categoryName.toUpperCase());
+            Categories.valueOf(categoryName.toUpperCase());
             TextUI.displayMsg(categoryName + " found, you can watch these movies and series: ");
 
             for (Media m : media) {
