@@ -8,15 +8,15 @@ import java.util.*;
 
 public class FileIO {
 
-        public static HashMap<String, String> readUserCredentials(String path) {
-            HashMap<String, String> data = new HashMap<String, String>();
+        public static Map<String, String> readUserCredentials(String path) {
+            Map<String, String> data = new HashMap<>();
             File file = new File(path);
             try {
                 Scanner scan = new Scanner(file);
                 scan.nextLine();//skip header
 
                 while (scan.hasNextLine()) {
-                    String line = scan.nextLine(); // "tess, 40000"
+                    String line = scan.nextLine(); // "username ; password"
                     String[] lineSplitter = line.split(";");
                     data.put(lineSplitter[0].trim(), lineSplitter[1].trim());
                 }
@@ -32,7 +32,7 @@ public class FileIO {
             try {
                 File file = new File(path);
 
-               HashMap<String , String> credentials = readUserCredentials(path);
+               Map<String , String> credentials = readUserCredentials(path);
                credentials.put(username,  password);
                 FileWriter writer = new FileWriter(path);
                 for(Map.Entry<String , String> entry : credentials.entrySet()) {
@@ -54,8 +54,11 @@ public class FileIO {
                     }
                     while (scan.hasNextLine()) {
                         String line = scan.nextLine();
-                        String[] lineSplitter = line.split(",");
+                        String[] lineSplitter = line.split(";");
+                        String[] lSplitter = line.split(",");
+
                         mediaList.add(lineSplitter);
+                        mediaList.add(lSplitter);
                     }
                     scan.close();
                 } catch (FileNotFoundException e) {
