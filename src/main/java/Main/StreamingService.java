@@ -32,20 +32,16 @@ public class StreamingService {
             return result;
         }
 
-        try {
-            SeriesCategories.valueOf(mediaName.toUpperCase());
-            TextUI.displayMsg(mediaName + " found, enjoy!");
-
             for (Media m : media) {
                 if(m.getName().contains(mediaName)) {
                     result.add(m);
+                    TextUI.displayMsg(mediaName + " found, enjoy!");
                 }
             }
-        }
-        catch (IllegalArgumentException e) {
-            TextUI.displayMsg(mediaName + " not found, try again: ");
-            return searchMedia();
-        }
+            if(result.isEmpty()){
+                TextUI.displayMsg(mediaName + " not found, try again!");
+                return searchMedia();
+            }
         return result;
     }
 
