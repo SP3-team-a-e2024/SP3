@@ -14,38 +14,44 @@ public class StreamingService {
     private Set<Media> media;
     private User currentUser;
 
-
-
     public StreamingService() {
         Set<Media> media = new HashSet<Media>();
         startMenu = new StartMenu();
         setup();
-
     }
 
 
     public void searchMovie(){
-            }
+    }
 
     public Set<Media> searchCategory(){
-
         TextUI.displayMsg("Please enter the category you wish to search, (or press x if you wont search for a category): ");
 
-        while (true) {
-            String categoryName = TextUI.promptText("Search for a category: ");
+        String categoryName = TextUI.promptText("Search for a category: ");
+        Set<Media> result = new HashSet<>();
 
-            if(categoryName.equalsIgnoreCase("x")){
-                TextUI.displayMsg("You decided not to search, closing searching... ");
-            }
+        if(categoryName.equalsIgnoreCase("x")){
+            TextUI.displayMsg("You decided not to search, closing searching... ");
+            return result;
+        }
 
-            try{
-                SeriesCategories seriesCategory = SeriesCategories.valueOf(categoryName.toUpperCase());
-                MovieCategories movieCategory = MovieCategories.valueOf(categoryName.toUpperCase());
-                TextUI.displayMsg("Category found: " + categoryName);
-            } catch (IllegalArgumentException e) {
-                TextUI.displayMsg("Category not found, try again: " + categoryName);
+        try {
+            SeriesCategories.valueOf(categoryName.toUpperCase());
+            MovieCategories.valueOf(categoryName.toUpperCase());
+            TextUI.displayMsg(categoryName + " found, you can watch these movies and series: ");
+
+            for (Media m : media) {
+                if(m.getCategories().contains(categoryName)) {
+                    result.add(m);
+                }
             }
         }
+        catch (IllegalArgumentException e) {
+            TextUI.displayMsg(categoryName + " not found, try again: ");
+            return searchCategory();
+        }
+
+        return result;
     }
 
     private void displayMenu(){
