@@ -27,7 +27,7 @@ public class StreamingService {
     public void searchMovie(){
             }
 
-    public void searchCategory(){
+    public Set<Media> searchCategory(){
 
         TextUI.displayMsg("Please enter the category you wish to search, (or press x if you wont search for a category): ");
 
