@@ -1,6 +1,6 @@
 package media;
 
-import enums.SeriesCategories;
+import enums.Categories;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -8,7 +8,7 @@ import java.util.TreeSet;
 public class Series extends Media {
     Set<Season> seasons = new TreeSet<>();
 
-    public Series(String name, float rating, int releaseYear, Set<SeriesCategories> categories) {
+    public Series(String name, float rating, int releaseYear, Set<Categories> categories) {
         super(name, rating, releaseYear, categories);
     }
 
