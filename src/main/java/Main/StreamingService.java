@@ -1,38 +1,61 @@
 package Main;//bare for at fjerne compiller fejl
+import enums.MovieCategories;
+import enums.SeriesCategories;
 import media.Media;
 import user.User;
 import util.TextUI;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class StreamingService {
 
     private StartMenu startMenu;
     //hashset is not certain
-    private Set<Media> media = new HashSet<Media>();
+    private Set<Media> media;
     private User currentUser;
-    //copied from monopoly
 
-
-    public void StreamingService() {
-        //copied from monopoly
-
+    public StreamingService() {
+        Set<Media> media = new HashSet<Media>();
+        startMenu = new StartMenu();
+        setup();
     }
 
 
     public void searchMovie(){
+    }
+
+    public Set<Media> searchCategory(){
+        TextUI.displayMsg("Please enter the category you wish to search, (or press x if you wont search for a category): ");
+
+        String categoryName = TextUI.promptText("Search for a category: ");
+        Set<Media> result = new HashSet<>();
+
+        if(categoryName.equalsIgnoreCase("x")){
+            TextUI.displayMsg("You decided not to search, closing searching... ");
+            return result;
+        }
+
+        try {
+            SeriesCategories.valueOf(categoryName.toUpperCase());
+            MovieCategories.valueOf(categoryName.toUpperCase());
+            TextUI.displayMsg(categoryName + " found, you can watch these movies and series: ");
+
+            for (Media m : media) {
+                if(m.getCategories().contains(categoryName)) {
+                    result.add(m);
+                }
             }
+        }
+        catch (IllegalArgumentException e) {
+            TextUI.displayMsg(categoryName + " not found, try again: ");
+            return searchCategory();
+        }
 
-    public void searchCategory(){
-
+        return result;
     }
 
     private void displayMenu(){
-        TextUI.displayMsg("Welcome to notflix");
+        TextUI.displayMsg("Welcome to NotFlix");
         List<String> options = new ArrayList();
         options.add("Search movie");
         options.add("Search categories");
