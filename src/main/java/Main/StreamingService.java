@@ -20,8 +20,30 @@ public class StreamingService {
     }
 
 
-    public void searchMovie(){
+    public Set<Media> searchMedia(){
+        TextUI.displayMsg("Please enter the title you wish to search, (or press x if you wont search for a movie): ");
+
+        String mediaName = TextUI.promptText("Search for a title: ");
+        Set<Media> result = new HashSet<>();
+
+        if(mediaName.equalsIgnoreCase("x")){
+            TextUI.displayMsg("You decided not to search, closing searching... ");
+            return result;
+        }
+
+            for (Media m : media) {
+                if(m.getName().contains(mediaName)) {
+                    result.add(m);
+                    TextUI.displayMsg(mediaName + " found, enjoy!");
+                }
+            }
+            if(result.isEmpty()){
+                TextUI.displayMsg(mediaName + " not found, try again!");
+                return searchMedia();
+            }
+        return result;
     }
+
 
     public Set<Media> searchCategory(){
         TextUI.displayMsg("Please enter the category you wish to search, (or press x if you wont search for a category): ");
@@ -62,7 +84,7 @@ public class StreamingService {
         options = TextUI.promptChoice(options,1,"What do you want to do");
         switch (options.get(0)) {
             case "Search movie":
-                searchMovie();
+                searchMedia();
                 break;
             case "Search categories":
                 searchCategory();
