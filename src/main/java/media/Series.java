@@ -27,12 +27,12 @@ public class Series extends Media implements Playable {
     }
 
     @Override
-    public int getReleaseYear() {
-        return 0;
+    public int[] getReleaseYear() {
+        return new int[]{};
     }
 
     @Override
-    public Set<Enum> getCategories() {
+    public Set<Categories> getCategories() {
         return Set.of();
     }
 

@@ -1,7 +1,8 @@
 package media;
 import Main.Playable;
 import enums.Categories;
-
+import util.TextUI;
+import java.util.Arrays;
 import java.util.Set;
 
 public class Movie extends Media implements Playable {
@@ -9,23 +10,52 @@ public class Movie extends Media implements Playable {
         super(name, rating, releaseYear, categories);
     }
 
+    @Override
     public void playMedia(){
+        TextUI.displayMsg("Now playing: '" + this.getName() + "'");
+    }
 
+    @Override
+    public String getName(){
+        return this.name;
     }
-    public String getName(){return ""; }
+
+    @Override
     public float getRating(){
-        return 0;
+        return this.rating;
     }
-    public int getReleaseYear(){
-        return 0;
+
+    @Override
+    public int[] getReleaseYear(){
+        return this.releaseYear;
     }
-    public Set<Enum> getCategories(){
-        return null;
+
+    @Override
+    public Set<Categories> getCategories(){
+        return this.categories;
     }
+
+    @Override
     public boolean equals(Object o){
+        if (o instanceof Movie) {
+            Movie movie = (Movie)o;
+            boolean isNameEqual = this.getName().equalsIgnoreCase(movie.getName());
+            boolean isRatingEqual = this.getRating() == movie.getRating();
+            boolean isReleaseYearEqual = Arrays.equals(this.getReleaseYear(), movie.getReleaseYear());
+            boolean areCategoriesEqual = this.getCategories().equals(movie.getCategories());
+            return isNameEqual && isRatingEqual && isReleaseYearEqual && areCategoriesEqual;
+        }
+
         return false;
     }
-    public int hashCode(){
-        return 0;
+
+    @Override
+    public int hashCode() {
+        return (int) (
+                this.getName().hashCode()
+                * this.getRating()
+                * Arrays.hashCode(this.getReleaseYear())
+                * this.getCategories().hashCode()
+        );
     }
 }

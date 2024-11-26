@@ -4,10 +4,10 @@ import java.util.Set;
 
 public abstract class Media {
 
-    private String name;
-    private float rating;
-    private int[] releaseYear;
-    private Set<Enum> categories;
+    protected String name;
+    protected float rating;
+    protected int[] releaseYear;
+    protected Set<Categories> categories;
 
     public Media(String name, float rating, int[] releaseYear, Set<?> categories) {
         this.name = name;
@@ -22,7 +22,7 @@ public abstract class Media {
     public abstract float getRating();
 
 
-    public abstract int getReleaseYear();
+    public abstract int[] getReleaseYear();
 
 
     public abstract Set<Enum> getCategories();
