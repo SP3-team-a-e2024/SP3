@@ -67,12 +67,15 @@ public class StartMenu {
         username = username.trim();
         String password = TextUI.promptText("Please create a new password: ");
         password = password.trim();
-        if(username == null || password == null || username.equals("") || password.equals("")){
+        if (username.trim() != username || password.trim() != password) {
+            TextUI.displayMsg("Username and password is incorrect \n username and password can't contain spaces");
+            signUp();
+            return;
+        } else if (username == null || password == null || username.equals("") || password.equals("")) {
             TextUI.displayMsg("Username or password is empty, please try again");
             signUp();
             return;
-        }
-        else if(username.length() < 4 || password.length() < 4) {
+        } else if (username.length() < 4 || password.length() < 4) {
             TextUI.displayMsg("Username and password must contian at least 4 characters, please try again");
             signUp();
             return;
