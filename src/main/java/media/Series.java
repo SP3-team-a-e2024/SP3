@@ -1,14 +1,15 @@
 package media;
 
-import enums.SeriesCategories;
+import enums.Categories;
 import Main.Playable;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashSet;
+import java.util.List;
 
 public class Series extends Media implements Playable {
-    Set<Season> seasons = new TreeSet<>();
+    Set<Season> seasons = new HashSet<>();
 
-    public Series(String name, float rating, int releaseYear, Set<SeriesCategories> categories) {
+    public Series(String name, float rating, int[] releaseYear, Set<Categories> categories, List<Integer> seasons, List<Integer> episodes) {
         super(name, rating, releaseYear, categories);
     }
     public void playMedia(){
