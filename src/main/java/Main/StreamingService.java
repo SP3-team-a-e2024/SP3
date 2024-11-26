@@ -74,7 +74,6 @@ public class StreamingService {
                 //missing function. in user?
                 break;
         }
-
     }
 
     private void setup(){
