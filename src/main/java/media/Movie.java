@@ -6,18 +6,18 @@ import java.util.Arrays;
 import java.util.Set;
 
 public class Movie extends Media implements Playable {
-    public Movie(String name, float rating, int[] releaseYear, Set<Categories> categories) {
-        super(name, rating, releaseYear, categories);
+    public Movie(String title, float rating, int[] releaseYear, Set<Categories> categories) {
+        super(title, rating, releaseYear, categories);
     }
 
     @Override
     public void playMedia(){
-        TextUI.displayMsg("Now playing: '" + this.getName() + "'");
+        TextUI.displayMsg("Now playing: '" + this.getTitle() + "'");
     }
 
     @Override
-    public String getName(){
-        return this.name;
+    public String getTitle(){
+        return this.title;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Movie extends Media implements Playable {
     public boolean equals(Object o){
         if (o instanceof Movie) {
             Movie movie = (Movie)o;
-            boolean isNameEqual = this.getName().equalsIgnoreCase(movie.getName());
+            boolean isNameEqual = this.getTitle().equalsIgnoreCase(movie.getTitle());
             boolean isRatingEqual = this.getRating() == movie.getRating();
             boolean isReleaseYearEqual = Arrays.equals(this.getReleaseYear(), movie.getReleaseYear());
             boolean areCategoriesEqual = this.getCategories().equals(movie.getCategories());
@@ -52,7 +52,7 @@ public class Movie extends Media implements Playable {
     @Override
     public int hashCode() {
         return (int) (
-                this.getName().hashCode()
+                this.getTitle().hashCode()
                 * this.getRating()
                 * Arrays.hashCode(this.getReleaseYear())
                 * this.getCategories().hashCode()
