@@ -1,14 +1,15 @@
 package media;
 
-import enums.Categories;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.List;
 
-public class Season extends Series {
+
+public class Season{
     Set <Episode> episodes = new HashSet<>();
 
-    public Season(String name, float rating, int[] releaseYear, Set<Categories> categories, List<Integer> seasons, List<Integer> episodes) {
-        super(name, rating, releaseYear, categories, seasons, episodes);
+    public Season(int episodes) {
+        for (int i = 0; i < episodes; i++) {
+            this.episodes.add(new Episode(i));
+        }
     }
 }
