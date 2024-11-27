@@ -28,8 +28,6 @@ public class Movie extends Media implements Playable {
     @Override
     public int[] getReleaseYear(){
         return this.releaseYear;
-    public int[] getReleaseYear(){
-        return 0;
     }
 
     @Override
@@ -55,9 +53,9 @@ public class Movie extends Media implements Playable {
     public int hashCode() {
         return (int) (
                 this.getTitle().hashCode()
-                * this.getRating()
-                * Arrays.hashCode(this.getReleaseYear())
-                * this.getCategories().hashCode()
+                        * this.getRating()
+                        * Arrays.hashCode(this.getReleaseYear())
+                        * this.getCategories().hashCode()
         );
     }
 }

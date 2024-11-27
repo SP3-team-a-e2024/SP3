@@ -17,7 +17,8 @@ public class Series extends Media implements Playable {
             this.seasons.add(new Season(episodes.get(i)));
         }
     }
-    public void playMedia(){
+
+    public void playMedia() {
 
     }
 
@@ -32,48 +33,51 @@ public class Series extends Media implements Playable {
     @Override
     public String getTitle() {
         return "";
-    public String getName() {
-        return this.name;
-    }
+        public String getName () {
+            return this.name;
+        }
 
-    @Override
-    public float getRating() {
-        return this.rating;
-    }
+        @Override
+        public float getRating () {
+            return this.rating;
+        }
 
-    @Override
-    public int[] getReleaseYear() {
-        return new int[]{};
-    public int[] getReleaseYear() {
-        return this.releaseYear;
-    }
+        @Override
+        public int[] getReleaseYear () {
+            return new int[]{};
+            public int[] getReleaseYear () {
+                return this.releaseYear;
+            }
 
-    @Override
-    public Set<Categories> getCategories() {
-        return Set.of();
-    public Set<Enum> getCategories() {
-        return this.categories;
-    }
+            @Override
+            public Set<Categories> getCategories () {
+                return Set.of();
+                public Set<Enum> getCategories () {
+                    return this.categories;
+                }
 
-    @Override
-    public boolean equals(Object o) {
-        Series series = (Series) o;
-        boolean isNameEqual = this.name.equals(series.name);
-        boolean isRatingEqual = this.rating == series.rating;
-        boolean isReleaseYearEqual = this.releaseYear == series.releaseYear;
-        boolean isCategoriesEqual = this.categories.equals(series.categories);
-        boolean isSeasonsEqual = this.seasons.equals(series.seasons);
-        return isNameEqual && isRatingEqual && isReleaseYearEqual && isCategoriesEqual && isSeasonsEqual;
-    }
+                @Override
+                public boolean equals (Object o){
+                    Series series = (Series) o;
+                    boolean isNameEqual = this.name.equals(series.name);
+                    boolean isRatingEqual = this.rating == series.rating;
+                    boolean isReleaseYearEqual = this.releaseYear == series.releaseYear;
+                    boolean isCategoriesEqual = this.categories.equals(series.categories);
+                    boolean isSeasonsEqual = this.seasons.equals(series.seasons);
+                    return isNameEqual && isRatingEqual && isReleaseYearEqual && isCategoriesEqual && isSeasonsEqual;
+                }
 
-    @Override
-    public int hashCode() {
-        return (int) (
-                this.getName().hashCode()
-                * this.getRating()
-                * Arrays.hashCode(this.getReleaseYear())
-                * this.getCategories().hashCode()
-                * this.getSeasons().hashCode()
-                );
+                @Override
+                public int hashCode () {
+                    return (int) (
+                            this.getName().hashCode()
+                                    * this.getRating()
+                                    * Arrays.hashCode(this.getReleaseYear())
+                                    * this.getCategories().hashCode()
+                                    * this.getSeasons().hashCode()
+                    );
+                }
+            }
+        }
     }
 }
