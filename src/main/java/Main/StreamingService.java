@@ -7,6 +7,8 @@ import util.TextUI;
 
 import java.util.*;
 
+import static java.lang.System.exit;
+
 public class StreamingService {
     private Set<Media> media;
     private StartMenu startMenu;
@@ -86,6 +88,7 @@ public class StreamingService {
         options.add("Search categories");
         options.add("See previous movies watched");
         options.add("See saved movies");
+        options.add("Exit");
         options = TextUI.promptChoice(options,1,"What do you want to do");
         switch (options.get(0)) {
             case "Search movie":
@@ -100,7 +103,11 @@ public class StreamingService {
             case "See saved movies":
                 //missing function. in user?
                 break;
+            case "Exit":
+                exit(0);
+                break;
         }
+        displayMenu();
     }
 
     private void setup(){
