@@ -30,6 +30,8 @@ public class Series extends Media implements Playable {
     }
 
     @Override
+    public String getTitle() {
+        return "";
     public String getName() {
         return this.name;
     }
@@ -41,10 +43,14 @@ public class Series extends Media implements Playable {
 
     @Override
     public int[] getReleaseYear() {
+        return new int[]{};
+    public int[] getReleaseYear() {
         return this.releaseYear;
     }
 
     @Override
+    public Set<Categories> getCategories() {
+        return Set.of();
     public Set<Enum> getCategories() {
         return this.categories;
     }
