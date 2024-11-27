@@ -1,13 +1,13 @@
 package media;
-
 import enums.Categories;
-import Main.Playable;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 
-public class Series extends Media implements Playable {
+public class Series extends Media {
     Set<Season> seasons = new HashSet<>();
+
     //constructor
     public Series(String name, float rating, int[] releaseYear, Set<Categories> categories, List<Integer> seasonlist, List<Integer> episodes) {
         super(name, rating, releaseYear, categories);
@@ -16,44 +16,66 @@ public class Series extends Media implements Playable {
             this.seasons.add(new Season(episodes.get(i)));
         }
     }
-    //plays media (there is no media, this is a dummy)
-    public void playMedia(){
-
-    }
 
     //getter for title
+    public Set<Season> getSeasons() {
+        return this.getSeasons();
+    }
+
+    public void setSeasons(Set<Season> seasons) {
+        this.seasons = seasons;
+    }
+
     @Override
     public String getTitle() {
-        return "";
+        return this.title;
     }
 
     //getter for rating
     @Override
     public float getRating() {
-        return 0;
+        return this.rating;
     }
 
     //getter for releaseYear
     @Override
     public int[] getReleaseYear() {
-        return new int[]{};
+        return this.releaseYear;
     }
 
     //getter for categories
     @Override
     public Set<Categories> getCategories() {
-        return Set.of();
+        return this.categories;
     }
+
     //equals override
-    //todo: equals function
     @Override
     public boolean equals(Object o) {
-        return false;
+        //can only be the same if its the same class
+        if (!(o instanceof Series)) {
+            return false;
+        }
+        Series series = (Series) o;
+        //all variables must be the same to be the same
+        boolean isNameEqual = this.title.equals(series.title);
+        boolean isRatingEqual = this.rating == series.rating;
+        boolean isReleaseYearEqual = this.releaseYear == series.releaseYear;
+        boolean isCategoriesEqual = this.categories.equals(series.categories);
+        boolean isSeasonsEqual = this.seasons.equals(series.seasons);
+        return isNameEqual && isRatingEqual && isReleaseYearEqual && isCategoriesEqual && isSeasonsEqual;
     }
+
     //hashcode override
-    //todo: hashcode function
     @Override
     public int hashCode() {
-        return 0;
+        return (int) (
+                //variables must be the same for it to be equal
+                this.getTitle().hashCode()
+                        * this.getRating()
+                        * Arrays.hashCode(this.getReleaseYear())
+                        * this.getCategories().hashCode()
+                        * this.getSeasons().hashCode()
+        );
     }
 }
