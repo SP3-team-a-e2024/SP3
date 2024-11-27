@@ -3,12 +3,10 @@ package util;
 import enums.Categories;
 import media.Media;
 import media.Movie;
+import media.Season;
 import media.Series;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class FileIO {
@@ -168,5 +166,29 @@ public class FileIO {
             enumSet.add(Categories.valueOf(category.toUpperCase().trim().replace("-","_")));
         }
         return enumSet;
+    }
+
+    public static void saveUserMedia(String username, Set<Media> mediaSet, String path) {
+
+        File file = new File(path);
+        try {
+            //creates writer
+            Writer writer = new FileWriter(file);
+            String toSave = username + " ; ";
+            for (Media m : mediaSet) {
+                toSave += m.getTitle();
+                if (m instanceof Series){
+                    toSave += " , ";
+                    for (Season s : m.getSeries());
+                }
+            }
+            writer.write("\n");
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File was not found while saving media");
+        }
+        catch (IOException e) {
+            System.out.println("something went wrong when writing to file");
+        }
     }
 }
