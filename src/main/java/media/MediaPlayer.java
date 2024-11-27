@@ -138,6 +138,10 @@ public class MediaPlayer {
     }
 
     private static Media mapEpisodeToMedia(Media media) {
+        if (media instanceof Movie movie) {
+            return movie;
+        }
+
         Set<Episode> episode = new HashSet<>();
         episode.add(new Episode(getEpisode()));
 
