@@ -132,12 +132,6 @@ public class StreamingService {
         media.addAll(FileIO.readMedia("data/series"));
             media.addAll(FileIO.readMedia("data/movies"));
             media.addAll(FileIO.readMedia("data/series"));
-
-        }
-
-
     }
-
-    private void loadMedia(){}
-
 }
+
