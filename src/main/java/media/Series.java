@@ -9,8 +9,11 @@ import java.util.List;
 public class Series extends Media implements Playable {
     Set<Season> seasons = new HashSet<>();
 
-    public Series(String name, float rating, int[] releaseYear, Set<Categories> categories, List<Integer> seasons, List<Integer> episodes) {
+    public Series(String name, float rating, int[] releaseYear, Set<Categories> categories, List<Integer> seasonlist, List<Integer> episodes) {
         super(name, rating, releaseYear, categories);
+        for (int i = 0; i < seasonlist.size(); i++) {
+            this.seasons.add(new Season(episodes.get(i)));
+        }
     }
     public void playMedia(){
 

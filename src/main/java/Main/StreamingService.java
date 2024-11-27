@@ -2,21 +2,23 @@ package Main;//bare for at fjerne compiller fejl
 import enums.Categories;
 import media.Media;
 import user.User;
+import util.FileIO;
 import util.TextUI;
 
 import java.util.*;
 
 public class StreamingService {
-
+    private Set<Media> media;
     private StartMenu startMenu;
     //hashset is not certain
-    private Set<Media> media;
+
     private User currentUser;
 
     public StreamingService() {
-        Set<Media> media = new HashSet<Media>();
-        startMenu = new StartMenu();
+        this.media = new HashSet<Media>();
+        this.startMenu = new StartMenu();
         setup();
+
     }
 
 
@@ -28,6 +30,7 @@ public class StreamingService {
 
         if(mediaName.equalsIgnoreCase("x")){
             TextUI.displayMsg("You decided not to search, closing searching... ");
+            displayMenu();
             return result;
         }
 
@@ -108,6 +111,8 @@ public class StreamingService {
         }
         //if there is a user logged in it will start the menu
         else{
+            media.addAll(FileIO.readMedia("data/movies"));
+            media.addAll(FileIO.readMedia("data/series"));
             displayMenu();
         }
 

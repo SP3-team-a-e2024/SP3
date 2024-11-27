@@ -42,8 +42,9 @@ public class FileIO {
             Map<String, String> credentials = readUserCredentials(path);
             credentials.put(username, password);
             FileWriter writer = new FileWriter(path);
+            writer.write("username ; password\n");
             for (Map.Entry<String, String> entry : credentials.entrySet()) {
-                writer.write(entry.getKey() + ";" + entry.getValue() + "\n");
+                writer.write(entry.getKey() + " ; " + entry.getValue() + "\n");
             }
             writer.close();
         } catch (IOException e) {
