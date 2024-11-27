@@ -16,6 +16,13 @@ public class Series extends Media implements Playable {
             this.seasons.add(new Season(i,episodes.get(i)));
         }
     }
+
+    public Series(String name, float rating, int[] releaseYear, Set<Categories> categories, Set<Season> seasons) {
+        super(name, rating, releaseYear, categories);
+        this.seasons.addAll(seasons);
+    }
+
+
     //plays media (there is no media, this is a dummy)
     public void playMedia(){
 

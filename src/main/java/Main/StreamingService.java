@@ -111,12 +111,15 @@ public class StreamingService {
             setup();
             return;
         }
+
         //if there is a user logged in it will start the menu
         else{
             media.addAll(FileIO.readMedia("data/movies"));
             media.addAll(FileIO.readMedia("data/series"));
+            //todo: load users watched and saved movies
             displayMenu();
         }
+
 
     }
 
