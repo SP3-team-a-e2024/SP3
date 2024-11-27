@@ -41,7 +41,6 @@ public class StreamingService {
             }
             TextUI.displayMsg(mediaName + " found, enjoy!");
 
-
             if(result.isEmpty()){
                 TextUI.displayMsg(mediaName + " not found, try again!");
                 return searchMedia();
