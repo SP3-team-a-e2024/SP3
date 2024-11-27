@@ -17,11 +17,11 @@ public class User {
         setPassword(password);
         this.watchedMedia = new HashSet<>();
         this.savedMedia = new HashSet<>();
-    }
+    } // Constructor for User class
 
     public String getUsername() {
         return username;
-    }
+    } // get method to return username
 
     public void setUsername(String username) {
         if (username == null) return;
@@ -34,7 +34,9 @@ public class User {
             return;
         }
         this.username = username;
-    }
+    }   // The validation ensures that the `username` is non-null, non-empty, and of sufficient length.
+        // The validation messages are printed to the console to notify the user of any invalid input.
+        // The use of `isEmpty()` and `isBlank()` ensures that usernames containing only spaces are also considered invalid.
 
     public String getPassword() {
         return password;
@@ -51,7 +53,10 @@ public class User {
             return;
         }
         this.password = password;
-    }
+    }   // The validation ensures that the `password` is non-null, non-empty, and of a minimal acceptable length.
+        // The error messages are printed to the console to notify the user of invalid inputs.
+        // The use of `isEmpty()` and `isBlank()` ensures that passwords containing only whitespace are considered invalid.
+
 
     public Set<Media> getWatchedMedia(){
         return watchedMedia;

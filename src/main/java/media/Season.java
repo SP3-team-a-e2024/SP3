@@ -11,5 +11,5 @@ public class Season{
         for (int i = 0; i < episodes; i++) {
             this.episodes.add(new Episode(i));
         }
-    }
+    } // Constructor for season to calculate the amount of episodes in the season
 }

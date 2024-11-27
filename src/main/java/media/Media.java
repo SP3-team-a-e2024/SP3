@@ -16,21 +16,21 @@ public abstract class Media {
         this.categories = (Set<Enum>) categories;
     }
 
-    public abstract String getName();
+    public abstract String getName(); // returns name from the constructor
 
 
-    public abstract float getRating();
+    public abstract float getRating();// returns rating from the constructor
 
 
-    public abstract int getReleaseYear();
+    public abstract int getReleaseYear();// returns the release year from the constructor
 
 
-    public abstract Set<Enum> getCategories();
-
-    @Override
-    public abstract boolean equals(Object o);
+    public abstract Set<Enum> getCategories();// returns categories of enums from the constructor
 
     @Override
-    public abstract int hashCode();
+    public abstract boolean equals(Object o); // equals override for subclasses
+
+    @Override
+    public abstract int hashCode(); // hashcode override for subclasses
 
 }
