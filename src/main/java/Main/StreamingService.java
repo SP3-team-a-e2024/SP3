@@ -29,7 +29,6 @@ public class StreamingService {
 
         if(mediaName.equalsIgnoreCase("x")){
             TextUI.displayMsg("You decided not to search, closing searching... ");
-            displayMenu();
             return result;
         }
 
