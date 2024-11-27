@@ -62,9 +62,9 @@ public class Movie extends Media implements Playable {
         return (int) (
                 //variables must be the same for it to be equal
                 this.getTitle().hashCode()
-                * this.getRating()
-                * Arrays.hashCode(this.getReleaseYear())
-                * this.getCategories().hashCode()
+                        * this.getRating()
+                        * Arrays.hashCode(this.getReleaseYear())
+                        * this.getCategories().hashCode()
         );
     }
 }
