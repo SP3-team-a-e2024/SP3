@@ -4,7 +4,7 @@ import enums.Categories;
 import media.Media;
 import media.Movie;
 import media.Series;
-import user.User;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -124,9 +124,4 @@ public class FileIO {
         }
         return enumSet;
     }
-
-    
-
-
-
 }
