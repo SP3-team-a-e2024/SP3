@@ -1,31 +1,35 @@
 package media;
 
+import enums.Categories;
+
 import java.util.Set;
 
 public abstract class Media {
 
-    private String name;
-    private float rating;
-    private int[] releaseYear;
-    private Set<Enum> categories;
+    protected String title;
+    protected float rating;
+    protected int[] releaseYear;
+    protected Set<Categories> categories;
 
-    public Media(String name, float rating, int[] releaseYear, Set<?> categories) {
-        this.name = name;
+    public Media(String title, float rating, int[] releaseYear, Set<Categories> categories) {
+        this.title = title;
         this.rating = rating;
         this.releaseYear = releaseYear;
-        this.categories = (Set<Enum>) categories;
+        this.categories = categories;
     }
 
-    public abstract String getName();
+
+
+    public abstract String getTitle();
 
 
     public abstract float getRating();
 
 
-    public abstract int getReleaseYear();
+    public abstract int[] getReleaseYear();
 
 
-    public abstract Set<Enum> getCategories();
+    public abstract Set<Categories> getCategories();
 
     @Override
     public abstract boolean equals(Object o);
