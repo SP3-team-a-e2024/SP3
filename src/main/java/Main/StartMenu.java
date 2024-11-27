@@ -39,7 +39,7 @@ public class StartMenu {
         {
             Map<String, String> users =  FileIO.readUserCredentials("data/credentials");
             String username =  TextUI.promptText("Please enter your username: ");
-              = username.trim();
+            username  = username.trim();
             String password =  TextUI.promptText("Please enter your password: ");
             password = password.trim();
             if(username == null || password == null || username.equals("") || password.equals("")){

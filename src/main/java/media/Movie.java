@@ -16,7 +16,7 @@ public class Movie extends Media implements Playable {
     public float getRating(){
         return 0;
     }
-    public int getReleaseYear(){
+    public int[] getReleaseYear(){
         return 0;
     }
     public Set<Enum> getCategories(){
