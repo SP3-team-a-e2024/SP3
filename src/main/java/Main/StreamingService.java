@@ -81,24 +81,24 @@ public class StreamingService {
 
     private void displayMenu() {
         List<String> options = new ArrayList();
-        options.add("Search movie");
+        options.add("Search media");
         options.add("Search categories");
-        options.add("See previous movies watched");
-        options.add("See saved movies");
+        options.add("See previous media watched");
+        options.add("See saved media");
         options.add("Exit");
         options = TextUI.promptChoice(options, 1, "What do you want to do");
         Set<Media> result = new HashSet<>();
         switch (options.get(0)) {
-            case "Search movie":
+            case "Search media":
                 result = searchMedia();
                 break;
             case "Search categories":
                 result = searchCategory();
                 break;
-            case "See previous movies watched":
+            case "See previous media watched":
                 //missing function. in user?
                 break;
-            case "See saved movies":
+            case "See saved media":
                 //missing function. in user?
                 break;
             case "Exit":
