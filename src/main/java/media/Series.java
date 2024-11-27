@@ -18,10 +18,6 @@ public class Series extends Media implements Playable {
         }
     }
 
-    //plays media (there is no media, this is a dummy)
-    public void playMedia() {
-    }
-
     //getter for title
     public Set<Season> getSeasons() {
         return this.getSeasons();
