@@ -56,10 +56,11 @@ public class Series extends Media implements Playable {
         return this.categories;
     }
     //equals override
-    //todo: equals function
     @Override
     public boolean equals(Object o) {
+        //can only be the same if its the same class
         Series series = (Series) o;
+        //all variables must be the same to be the same
         boolean isNameEqual = this.title.equals(series.title);
         boolean isRatingEqual = this.rating == series.rating;
         boolean isReleaseYearEqual = this.releaseYear == series.releaseYear;
@@ -68,10 +69,10 @@ public class Series extends Media implements Playable {
         return isNameEqual && isRatingEqual && isReleaseYearEqual && isCategoriesEqual && isSeasonsEqual;
     }
     //hashcode override
-    //todo: hashcode function
     @Override
     public int hashCode() {
         return (int) (
+                //variables must be the same for it to be equal
                 this.getTitle().hashCode()
                         * this.getRating()
                         * Arrays.hashCode(this.getReleaseYear())
