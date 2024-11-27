@@ -13,8 +13,13 @@ public class Series extends Media {
         super(name, rating, releaseYear, categories);
         //for each season in the season list, create a season with an episode count corresponding to the same index in the episodes list
         for (int i = 0; i < seasonlist.size(); i++) {
-            this.seasons.add(new Season(episodes.get(i)));
+            this.seasons.add(new Season(i,episodes.get(i)));
         }
+    }
+
+    public Series(String name, float rating, int[] releaseYear, Set<Categories> categories, Set<Season> seasons) {
+        super(name, rating, releaseYear, categories);
+        this.seasons.addAll(seasons);
     }
 
     //getter for title

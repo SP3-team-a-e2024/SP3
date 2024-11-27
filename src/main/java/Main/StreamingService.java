@@ -130,6 +130,7 @@ public class StreamingService {
         //if there is a user logged in it will start the menu
         else {
             loadMedia();
+            //todo: load users watched and saved movies
             displayMenu();
         }
     }
@@ -138,4 +139,4 @@ public class StreamingService {
         media.addAll(FileIO.readMedia("data/movies"));
         media.addAll(FileIO.readMedia("data/series"));
     }
-    }
+}

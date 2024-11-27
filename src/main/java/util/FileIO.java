@@ -1,14 +1,8 @@
 package util;
 
 import enums.Categories;
-import media.Media;
-import media.Movie;
-import media.Series;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import media.*;
+import java.io.*;
 import java.util.*;
 
 public class FileIO {
@@ -168,5 +162,88 @@ public class FileIO {
             enumSet.add(Categories.valueOf(category.toUpperCase().trim().replace("-","_")));
         }
         return enumSet;
+    }
+
+    public static Set<Media> loadUserMedia(String username, Set<Media> media, String path) {
+        Set<Media> mediaSet = new HashSet<>();
+        File file = new File(path);
+        try{
+            Scanner scan = new Scanner(file);
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+                String[] lineSplitter = line.split(";");
+                if (lineSplitter[0].trim() == username) {
+                    for(int i = 1; i < lineSplitter.length; i++){
+                        String[] mediaArray = lineSplitter[i].split(",");
+                        //if its longer than 1 its a series
+                        if (mediaArray.length > 1) {
+                            Set<Season> seasons = new HashSet<>();
+                            ArrayList<Integer> episodes = new ArrayList<>();
+                            for (int j = 1; j < mediaArray.length; j++) {
+                                String[] seasonArray = mediaArray[j].split("-");
+                                for (int k = 1; k < seasonArray.length; k++) {
+                                    episodes.add(Integer.parseInt(seasonArray[k]));
+                                }
+                                seasons.add(new Season(Integer.parseInt(seasonArray[0]),episodes));
+                            }
+                            for (Media m : media) {
+                                if(m.getTitle() == mediaArray[0]) {
+                                    mediaSet.add(new Series(m.getTitle(),m.getRating(),m.getReleaseYear(),m.getCategories() ,seasons));
+                                }
+                            }
+                        }
+                        //then its a movie
+                        else {
+                            for (Media m : media) {
+                                if(m.getTitle() == mediaArray[0]) {
+                                    mediaSet.add(m);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("File was not found while reading user credentials");
+        }
+        return mediaSet;
+    }
+
+    public static void saveUserMedia(String username, Set<Media> mediaSet, String path) {
+        File file = new File(path);
+        try {
+            Scanner scan = new Scanner(file);
+            scan.nextLine();//header
+            Writer writer = new FileWriter(file);
+            writer.write("username ; movies ; series , season-episode-episode ;");
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+                String[] lineSplitter = line.split(";");
+                if (username != lineSplitter[0].trim()) {
+                    writer.write(line + "\n");
+                }
+            }
+            String toSave = username;
+            for (Media m : mediaSet) {
+                toSave += " ; " + m.getTitle();
+                if (m instanceof Series){
+                    for (Season s : ((Series)m).getSeasons()){
+                        toSave += " , " + s.getSeasonNumber();
+                        for (Episode e : s.getEpisodes()){
+                            toSave += "-" + e.getEpisodeNumber();
+                        }
+                    }
+                }
+            }
+            writer.write(toSave +"\n");
+            writer.close();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File was not found while saving media");
+        }
+        catch (IOException e) {
+            System.out.println("something went wrong when writing to file");
+        }
     }
 }
