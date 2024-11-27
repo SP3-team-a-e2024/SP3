@@ -11,7 +11,7 @@ public class Season{
 
     public Season(int seasonNumber, int episodes) {
         for (int i = 0; i < episodes; i++) {
-            this.episodes.add(new Episode(i));
+            this.episodes.add(new Episode(i+1));
         }
         this.seasonNumber = seasonNumber;
     }

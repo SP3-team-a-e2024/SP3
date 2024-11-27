@@ -52,7 +52,6 @@ public class StartMenu {
             if (users.containsKey(username)) {
                 if (users.get(username).equals(password)) {
                     TextUI.displayMsg("You have successfully logged in. Welcome " + username + " to NotFlix");
-                    //todo: make it able to get media
                     return new User(username, password);
                 }
             }
@@ -91,7 +90,6 @@ public class StartMenu {
         //Checks if there is already a existing user with the same username
         if (users.containsKey(username)) {
             TextUI.displayMsg("Username already exists, please try again or please login");
-            loginMenuLogic();
             return;
         }
         //Saves the user which has passed the checks
