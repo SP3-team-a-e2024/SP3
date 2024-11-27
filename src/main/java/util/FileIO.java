@@ -48,7 +48,6 @@ public class FileIO {
     public static void saveCredentials(String username, String password, String path) {
         //as it is file related, try catch
         try {
-            File file = new File(path);
             //gets all users
             Map<String, String> credentials = readUserCredentials(path);
             //adds the new user to the map
