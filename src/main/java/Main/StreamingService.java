@@ -104,7 +104,7 @@ public class StreamingService {
     }
 
     private void setup(){
-        //if theres no user logged in, it will go to the login page
+        //if there is no user logged in, it will go to the login page
         if (currentUser == null){
             currentUser = startMenu.loginMenuLogic();
             //if something somehow goes wrong it will double check that there is a user
@@ -113,13 +113,13 @@ public class StreamingService {
         }
         //if there is a user logged in it will start the menu
         else{
-            media.addAll(FileIO.readMedia("data/movies"));
-            media.addAll(FileIO.readMedia("data/series"));
+            loadMedia();
             displayMenu();
         }
-
     }
 
-    private void loadMedia(){}
-
+    private void loadMedia(){
+        media.addAll(FileIO.readMedia("data/movies"));
+        media.addAll(FileIO.readMedia("data/series"));
+    }
 }
