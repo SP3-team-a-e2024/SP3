@@ -83,8 +83,5 @@ public class Series extends Media {
                         * this.getSeasons().hashCode()
         );
     }
-    public Set<Season> getSeasons() {
-        return seasons;
-    }
 }
 
