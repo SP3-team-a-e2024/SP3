@@ -39,7 +39,6 @@ public class StreamingService {
                     result.add(m);
                 }
             }
-            TextUI.displayMsg(mediaName + " found, enjoy!");
 
             if(result.isEmpty()){
                 TextUI.displayMsg(mediaName + " not found, try again!");
