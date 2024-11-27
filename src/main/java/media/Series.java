@@ -24,7 +24,7 @@ public class Series extends Media {
 
     //getter for title
     public Set<Season> getSeasons() {
-        return this.getSeasons();
+        return this.seasons;
     }
 
     public void setSeasons(Set<Season> seasons) {
