@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 
-public class Series extends Media implements Playable {
+public class Series extends Media {
     Set<Season> seasons = new HashSet<>();
 
     //constructor
