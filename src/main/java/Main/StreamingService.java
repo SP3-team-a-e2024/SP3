@@ -13,7 +13,6 @@ public class StreamingService {
     //hashset is not certain
 
     private User currentUser;
-
     public StreamingService() {
         this.media = new HashSet<Media>();
         this.startMenu = new StartMenu();
@@ -82,7 +81,6 @@ public class StreamingService {
     }
 
     private void displayMenu(){
-        TextUI.displayMsg("Welcome to NotFlix");
         List<String> options = new ArrayList();
         options.add("Search movie");
         options.add("Search categories");
