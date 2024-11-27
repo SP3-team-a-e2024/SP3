@@ -15,6 +15,7 @@ public class StreamingService {
     //hashset is not certain
 
     private User currentUser;
+
     public StreamingService() {
         this.media = new HashSet<Media>();
         this.startMenu = new StartMenu();
@@ -23,80 +24,76 @@ public class StreamingService {
     }
 
 
-    public Set<Media> searchMedia(){
-        TextUI.displayMsg("Please enter the title you wish to search, (or press x if you wont search for a movie): "); // prompts a message for the user
+    public Set<Media> searchMedia() {
+        TextUI.displayMsg("Please enter the title you wish to search, (or press x if you wont search for a movie): ");
 
         String mediaName = TextUI.promptText("Search for a title: ");
         Set<Media> result = new HashSet<>(); // This is being used to return a value of our search of a movie or a series
 
-        if(mediaName.equalsIgnoreCase("x")){
+        if (mediaName.equalsIgnoreCase("x")) {
             TextUI.displayMsg("You decided not to search, closing searching... ");
             return result;
         }
 
-            for (Media m : media) {
-                if(m.getTitle().contains(mediaName)) {
-                    result.add(m);
-                }
+        for (Media m : media) {
+            if (m.getTitle().contains(mediaName)) {
+                result.add(m);
             }
+        }
 
-            if(result.isEmpty()){
-                TextUI.displayMsg(mediaName + " not found, try again!");
-                return searchMedia();
-            }
+        if (result.isEmpty()) {
+            TextUI.displayMsg(mediaName + " not found, try again!");
+            return searchMedia();
+        }
         return result;
     }   //  This method prompts the user to enter the title of a movie or series they want to search for.
-        // The user can also exit the search process by entering 'x'.
+    // The user can also exit the search process by entering 'x'.
 
 
-    public Set<Media> searchCategory(){
+    public Set<Media> searchCategory() {
         TextUI.displayMsg("Please enter the category you wish to search, (or press x if you wont search for a category): ");
 
         String categoryName = TextUI.promptText("Search for a category: ");
         Set<Media> result = new HashSet<>();
 
-        if(categoryName.equalsIgnoreCase("x")){
+        if (categoryName.equalsIgnoreCase("x")) {
             TextUI.displayMsg("You decided not to search, closing searching... ");
             return result;
         }
-
         try {
-            Categories.valueOf(categoryName.toUpperCase());
-            TextUI.displayMsg(categoryName + " found, you can watch these movies and series: ");
-
             for (Media m : media) {
-                if(m.getCategories().contains(categoryName)) {
+                if (m.getCategories().contains(Categories.valueOf(categoryName.toUpperCase()))) {
                     result.add(m);
                 }
             }
-        }
 
-        catch (IllegalArgumentException e) {
+            TextUI.displayMsg(categoryName + " found, you can watch these movies and series: ");
+            return result;
+        } catch (Exception e) {
             TextUI.displayMsg(categoryName + " not found, try again: ");
             return searchCategory();
         }
-
-        return result;
     }   // Prompt the user to enter a category name or to exit.
-        // If 'x' is entered, terminate the search and return an empty result.
-        // Attempt to match the entered category to a predefined enum (`Categories`).
-        // If found, iterate through the media list and add matching items to the result set.
-        // If not found, handle the exception and prompt the user to search again.
+    // If 'x' is entered, terminate the search and return an empty result.
+    // Attempt to match the entered category to a predefined enum (`Categories`).
+    // If found, iterate through the media list and add matching items to the result set.
+    // If not found, handle the exception and prompt the user to search again.
 
-    private void displayMenu(){
+    private void displayMenu() {
         List<String> options = new ArrayList();
         options.add("Search movie");
         options.add("Search categories");
         options.add("See previous movies watched");
         options.add("See saved movies");
         options.add("Exit");
-        options = TextUI.promptChoice(options,1,"What do you want to do");
+        options = TextUI.promptChoice(options, 1, "What do you want to do");
+        Set<Media> result = new HashSet<>();
         switch (options.get(0)) {
             case "Search movie":
-                searchMedia();
+                result = searchMedia();
                 break;
             case "Search categories":
-                searchCategory();
+                result = searchCategory();
                 break;
             case "See previous movies watched":
                 //missing function. in user?
@@ -108,33 +105,37 @@ public class StreamingService {
                 exit(0);
                 break;
         }
-
+        displayTitles(result);
         displayMenu();
     }   // Displays a welcome message to the user.
-        // Defines a list of options that the user can choose from.
-        //Prompts the user to choose one option from the list.
-        // Uses a `switch` statement to handle the user's selected option and executes the appropriate action.
-
-    
+    // Defines a list of options that the user can choose from.
+    //Prompts the user to choose one option from the list.
+    // Uses a `switch` statement to handle the user's selected option and executes the appropriate action.
 
 
-    private void setup(){
+    private void displayTitles(Set<Media> media) {
+        for (Media m : media) {
+            TextUI.displayMsg(m.getTitle());
+        }
+    }
+
+    private void setup() {
         //if there is no user logged in, it will go to the login page
-        if (currentUser == null){
+        if (currentUser == null) {
             currentUser = startMenu.loginMenuLogic();
             //if something somehow goes wrong it will double check that there is a user
             setup();
             return;
         }
         //if there is a user logged in it will start the menu
-        else{
+        else {
             loadMedia();
             displayMenu();
         }
     }
 
-    private void loadMedia(){
+    private void loadMedia() {
         media.addAll(FileIO.readMedia("data/movies"));
         media.addAll(FileIO.readMedia("data/series"));
     }
-}
+    }
