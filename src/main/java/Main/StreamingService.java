@@ -171,7 +171,7 @@ public class StreamingService {
     }
 
     private void saveWatchedAndSavedMedia() {
-        FileIO.saveUserMedia(currentUser.getUsername(),media,watchedMediaPath);
-        FileIO.saveUserMedia(currentUser.getUsername(),media,savedMediaPath);
+        FileIO.saveUserMedia(currentUser.getUsername(),currentUser.getWatchedMedia(),watchedMediaPath);
+        FileIO.saveUserMedia(currentUser.getUsername(),currentUser.getSavedMedia(),savedMediaPath);
     }
 }
