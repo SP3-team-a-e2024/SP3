@@ -20,7 +20,7 @@ public class Series extends Media implements Playable {
     }
 
     @Override
-    public String getName() {
+    public String getTitle() {
         return "";
     }
 

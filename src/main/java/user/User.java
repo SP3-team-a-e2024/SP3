@@ -2,7 +2,6 @@ package user;
 
 import media.Media;
 import util.TextUI;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -67,11 +66,11 @@ public class User {
 
     public boolean addSavedMedia(Media media) {
         if (savedMedia.contains(media)) {
-            TextUI.displayMsg(media.getName()+ " is already saved");
+            TextUI.displayMsg(media.getTitle()+ " is already saved");
             return false;
         } else {
             savedMedia.add(media);
-            TextUI.displayMsg(media.getName()+ " has been saved");
+            TextUI.displayMsg(media.getTitle()+ " has been saved");
         }
         return true;
     }
