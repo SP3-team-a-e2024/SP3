@@ -14,7 +14,7 @@ public class StreamingService {
 
     private User currentUser;
 
-    public StreamingService() { // konstruktor
+    public StreamingService() {
         this.media = new HashSet<Media>();
         this.startMenu = new StartMenu();
         setup();

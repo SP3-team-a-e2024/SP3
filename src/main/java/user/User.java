@@ -17,11 +17,11 @@ public class User {
         setPassword(password);
         this.watchedMedia = new HashSet<>();
         this.savedMedia = new HashSet<>();
-    } // Constructor for User class
+    }
 
     public String getUsername() {
         return username;
-    } // get method to return username
+    }
 
     public void setUsername(String username) {
         if (username == null) return;
