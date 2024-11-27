@@ -1,10 +1,7 @@
 package util;
 
 import enums.Categories;
-import media.Media;
-import media.Movie;
-import media.Season;
-import media.Series;
+import media.*;
 
 import java.io.*;
 import java.util.*;
@@ -169,20 +166,33 @@ public class FileIO {
     }
 
     public static void saveUserMedia(String username, Set<Media> mediaSet, String path) {
-
         File file = new File(path);
         try {
-            //creates writer
+            Scanner scan = new Scanner(file);
+            scan.nextLine();//header
             Writer writer = new FileWriter(file);
-            String toSave = username + " ; ";
-            for (Media m : mediaSet) {
-                toSave += m.getTitle();
-                if (m instanceof Series){
-                    toSave += " , ";
-                    for (Season s : m.getSeries());
+            writer.write("username ; movies ; series , season-episode-episode ;");
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+                String[] lineSplitter = line.split(";");
+                if (username != lineSplitter[0].trim()) {
+                    writer.write(line + "\n");
                 }
             }
-            writer.write("\n");
+            String toSave = username;
+            for (Media m : mediaSet) {
+                toSave += " ; " + m.getTitle();
+                if (m instanceof Series){
+                    for (Season s : ((Series)m).getSeasons()){
+                        toSave += " , " + s.getSeasonNumber();
+                        for (Episode e : s.getEpisodes()){
+                            toSave += "-" + e.getEpisodeNumber();
+                        }
+                    }
+                }
+            }
+            writer.write(toSave +"\n");
+            writer.close();
         }
         catch (FileNotFoundException e) {
             System.out.println("File was not found while saving media");

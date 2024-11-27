@@ -13,7 +13,7 @@ public class Series extends Media implements Playable {
         super(name, rating, releaseYear, categories);
         //for each season in the season list, create a season with an episode count corresponding to the same index in the episodes list
         for (int i = 0; i < seasonlist.size(); i++) {
-            this.seasons.add(new Season(episodes.get(i)));
+            this.seasons.add(new Season(i,episodes.get(i)));
         }
     }
     //plays media (there is no media, this is a dummy)
@@ -55,5 +55,9 @@ public class Series extends Media implements Playable {
     @Override
     public int hashCode() {
         return 0;
+    }
+
+    public Set<Season> getSeasons() {
+        return seasons;
     }
 }
