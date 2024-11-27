@@ -13,7 +13,6 @@ public class StreamingService {
     //hashset is not certain
 
     private User currentUser;
-
     public StreamingService() {
         this.media = new HashSet<Media>();
         this.startMenu = new StartMenu();
@@ -37,9 +36,10 @@ public class StreamingService {
             for (Media m : media) {
                 if(m.getTitle().contains(mediaName)) {
                     result.add(m);
-                    TextUI.displayMsg(mediaName + " found, enjoy!");
                 }
             }
+            TextUI.displayMsg(mediaName + " found, enjoy!");
+
             if(result.isEmpty()){
                 TextUI.displayMsg(mediaName + " not found, try again!");
                 return searchMedia();
@@ -64,11 +64,14 @@ public class StreamingService {
             TextUI.displayMsg(categoryName + " found, you can watch these movies and series: ");
 
             for (Media m : media) {
+                var category = m.getCategories();
+                boolean mybool = category.contains(categoryName);
                 if(m.getCategories().contains(categoryName)) {
                     result.add(m);
                 }
             }
         }
+
         catch (IllegalArgumentException e) {
             TextUI.displayMsg(categoryName + " not found, try again: ");
             return searchCategory();
@@ -78,7 +81,6 @@ public class StreamingService {
     }
 
     private void displayMenu(){
-        TextUI.displayMsg("Welcome to NotFlix");
         List<String> options = new ArrayList();
         options.add("Search movie");
         options.add("Search categories");
