@@ -22,10 +22,10 @@ public class StreamingService {
 
 
     public Set<Media> searchMedia(){
-        TextUI.displayMsg("Please enter the title you wish to search, (or press x if you wont search for a movie): ");
+        TextUI.displayMsg("Please enter the title you wish to search, (or press x if you wont search for a movie): "); // prompts a message for the user
 
         String mediaName = TextUI.promptText("Search for a title: ");
-        Set<Media> result = new HashSet<>();
+        Set<Media> result = new HashSet<>(); // This is being used to return a value of our search of a movie or a series
 
         if(mediaName.equalsIgnoreCase("x")){
             TextUI.displayMsg("You decided not to search, closing searching... ");
@@ -45,7 +45,8 @@ public class StreamingService {
                 return searchMedia();
             }
         return result;
-    }
+    }   //  This method prompts the user to enter the title of a movie or series they want to search for.
+        // The user can also exit the search process by entering 'x'.
 
 
     public Set<Media> searchCategory(){
@@ -78,7 +79,11 @@ public class StreamingService {
         }
 
         return result;
-    }
+    }   // Prompt the user to enter a category name or to exit.
+        // If 'x' is entered, terminate the search and return an empty result.
+        // Attempt to match the entered category to a predefined enum (`Categories`).
+        // If found, iterate through the media list and add matching items to the result set.
+        // If not found, handle the exception and prompt the user to search again.
 
     private void displayMenu(){
         List<String> options = new ArrayList();
@@ -101,7 +106,10 @@ public class StreamingService {
                 //missing function. in user?
                 break;
         }
-    }
+    }   // Displays a welcome message to the user.
+        // Defines a list of options that the user can choose from.
+        //Prompts the user to choose one option from the list.
+        // Uses a `switch` statement to handle the user's selected option and executes the appropriate action.
 
     private void setup(){
         //if there is no user logged in, it will go to the login page
