@@ -35,7 +35,7 @@ public class StreamingService {
         }
 
             for (Media m : media) {
-                if(m.getName().contains(mediaName)) {
+                if(m.getTitle().contains(mediaName)) {
                     result.add(m);
                     TextUI.displayMsg(mediaName + " found, enjoy!");
                 }
