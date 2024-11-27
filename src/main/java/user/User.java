@@ -84,4 +84,12 @@ public class User {
         savedMedia.remove(media);
         System.out.println("You just removed " + media + " from the list");
     }
+
+    public void setWatchedMedia(Set<Media> watchedMedia) {
+        this.watchedMedia = watchedMedia;
+    }
+
+    public void setSavedMedia(Set<Media> savedMedia) {
+        this.savedMedia = savedMedia;
+    }
 }
