@@ -1,6 +1,7 @@
 package Main;//bare for at fjerne compiller fejl
 import enums.Categories;
 import media.Media;
+import media.MediaPlayer;
 import user.User;
 import util.FileIO;
 import util.TextUI;
@@ -12,6 +13,10 @@ import static java.lang.System.exit;
 public class StreamingService {
     private Set<Media> media;
     private StartMenu startMenu;
+    private String watchedMediaPath = "data/usersWatchedMovies";
+    private String savedMediaPath = "data/usersSavedMovies";
+    private String movieDataPath = "data/movies";
+    private String seriesDataPath = "data/series";
     //hashset is not certain
 
     private User currentUser;
@@ -91,9 +96,11 @@ public class StreamingService {
         switch (options.get(0)) {
             case "Search media":
                 result = searchMedia();
+                selectTitle(result);
                 break;
             case "Search categories":
                 result = searchCategory();
+                selectTitle(result);
                 break;
             case "See previous media watched":
                 //missing function. in user?
@@ -102,10 +109,10 @@ public class StreamingService {
                 //missing function. in user?
                 break;
             case "Exit":
+                saveWatchedAndSavedMedia();
                 exit(0);
                 break;
         }
-        displayTitles(result);
         displayMenu();
     }   // Displays a welcome message to the user.
     // Defines a list of options that the user can choose from.
@@ -113,9 +120,27 @@ public class StreamingService {
     // Uses a `switch` statement to handle the user's selected option and executes the appropriate action.
 
 
-    private void displayTitles(Set<Media> media) {
+    private void selectTitle(Set<Media> media) {
+        List<String> options = new ArrayList<>();
+
         for (Media m : media) {
-            TextUI.displayMsg(m.getTitle());
+            options.add(m.getTitle());
+        }
+
+        Collections.sort(options);
+        options.add("Cancel");
+        options = TextUI.promptChoice(options, 1, "Please select an option: ");
+        String userInput = options.get(0);
+
+        if (userInput.equals("Cancel")) {
+            return;
+        }
+
+        for (Media m : media) {
+            if (m.getTitle().equals(userInput)) {
+                MediaPlayer.playerStrategy(m, currentUser);
+                break;
+            }
         }
     }
 
@@ -136,12 +161,17 @@ public class StreamingService {
     }
 
     private void loadMedia() {
-        media.addAll(FileIO.readMedia("data/movies"));
-        media.addAll(FileIO.readMedia("data/series"));
+        media.addAll(FileIO.readMedia(movieDataPath));
+        media.addAll(FileIO.readMedia(seriesDataPath));
     }
 
     private void loadWatchedAndSavedMedia() {
-        currentUser.setWatchedMedia(FileIO.loadUserMedia(currentUser.getUsername(),media,"data/usersWatchedMovies"));
-        currentUser.setSavedMedia(FileIO.loadUserMedia(currentUser.getUsername(),media,"data/usersSavedMovies"));
+        currentUser.setWatchedMedia(FileIO.loadUserMedia(currentUser.getUsername(),media,watchedMediaPath));
+        currentUser.setSavedMedia(FileIO.loadUserMedia(currentUser.getUsername(),media,savedMediaPath));
+    }
+
+    private void saveWatchedAndSavedMedia() {
+        FileIO.saveUserMedia(currentUser.getUsername(),media,watchedMediaPath);
+        FileIO.saveUserMedia(currentUser.getUsername(),media,savedMediaPath);
     }
 }
