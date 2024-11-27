@@ -39,7 +39,6 @@ public class StreamingService {
                     result.add(m);
                 }
             }
-            TextUI.displayMsg(mediaName + " found, enjoy!");
 
             if(result.isEmpty()){
                 TextUI.displayMsg(mediaName + " not found, try again!");
@@ -66,8 +65,6 @@ public class StreamingService {
             TextUI.displayMsg(categoryName + " found, you can watch these movies and series: ");
 
             for (Media m : media) {
-                var category = m.getCategories();
-                boolean mybool = category.contains(categoryName);
                 if(m.getCategories().contains(categoryName)) {
                     result.add(m);
                 }
