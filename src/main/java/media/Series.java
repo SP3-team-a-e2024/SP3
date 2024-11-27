@@ -13,7 +13,7 @@ public class Series extends Media {
         super(name, rating, releaseYear, categories);
         //for each season in the season list, create a season with an episode count corresponding to the same index in the episodes list
         for (int i = 0; i < seasonlist.size(); i++) {
-            this.seasons.add(new Season(i,episodes.get(i)));
+            this.seasons.add(new Season(i+1,episodes.get(i)));
         }
     }
 
