@@ -58,23 +58,20 @@ public class StreamingService {
             TextUI.displayMsg("You decided not to search, closing searching... ");
             return result;
         }
-
         try {
-            Categories.valueOf(categoryName.toUpperCase());
-            TextUI.displayMsg(categoryName + " found, you can watch these movies and series: ");
-
             for (Media m : media) {
-                if(m.getCategories().contains(categoryName)) {
+                if (m.getCategories().contains(Categories.valueOf(categoryName.toUpperCase()))) {
                     result.add(m);
                 }
             }
-        }
-        catch (IllegalArgumentException e) {
-            TextUI.displayMsg(categoryName + " not found, try again: ");
-            return searchCategory();
-        }
 
-        return result;
+            TextUI.displayMsg(categoryName + " found, you can watch these movies and series: ");
+            return result;
+        }
+        catch (Exception e) {
+                TextUI.displayMsg(categoryName + " not found, try again: ");
+                return searchCategory();
+        }
     }
 
     private void displayMenu(){
@@ -85,12 +82,13 @@ public class StreamingService {
         options.add("See previous movies watched");
         options.add("See saved movies");
         options = TextUI.promptChoice(options,1,"What do you want to do");
-        switch (options.get(0)) {
+        Set<Media> result = new HashSet<>();
+                switch (options.get(0)) {
             case "Search movie":
-                searchMedia();
+                result = searchMedia();
                 break;
             case "Search categories":
-                searchCategory();
+                result = searchCategory();
                 break;
             case "See previous movies watched":
                 //missing function. in user?
@@ -98,6 +96,13 @@ public class StreamingService {
             case "See saved movies":
                 //missing function. in user?
                 break;
+        }
+        displayTitles(result);
+    }
+
+    private void displayTitles(Set<Media> media){
+        for(Media m : media){
+            TextUI.displayMsg(m.getTitle());
         }
     }
 
