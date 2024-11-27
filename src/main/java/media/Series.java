@@ -1,8 +1,6 @@
 package media;
-
 import enums.Categories;
 import Main.Playable;
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.HashSet;
@@ -10,6 +8,7 @@ import java.util.List;
 
 public class Series extends Media implements Playable {
     Set<Season> seasons = new HashSet<>();
+
     //constructor
     public Series(String name, float rating, int[] releaseYear, Set<Categories> categories, List<Integer> seasonlist, List<Integer> episodes) {
         super(name, rating, releaseYear, categories);
@@ -18,9 +17,9 @@ public class Series extends Media implements Playable {
             this.seasons.add(new Season(episodes.get(i)));
         }
     }
+
     //plays media (there is no media, this is a dummy)
     public void playMedia() {
-
     }
 
     //getter for title
@@ -51,14 +50,17 @@ public class Series extends Media implements Playable {
 
     //getter for categories
     @Override
-
     public Set<Categories> getCategories() {
         return this.categories;
     }
+
     //equals override
     @Override
     public boolean equals(Object o) {
         //can only be the same if its the same class
+        if (!(o instanceof Series)) {
+            return false;
+        }
         Series series = (Series) o;
         //all variables must be the same to be the same
         boolean isNameEqual = this.title.equals(series.title);
@@ -68,6 +70,7 @@ public class Series extends Media implements Playable {
         boolean isSeasonsEqual = this.seasons.equals(series.seasons);
         return isNameEqual && isRatingEqual && isReleaseYearEqual && isCategoriesEqual && isSeasonsEqual;
     }
+
     //hashcode override
     @Override
     public int hashCode() {
