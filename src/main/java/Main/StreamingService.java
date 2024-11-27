@@ -31,7 +31,6 @@ public class StreamingService {
 
         if(mediaName.equalsIgnoreCase("x")){
             TextUI.displayMsg("You decided not to search, closing searching... ");
-            displayMenu();
             return result;
         }
 
@@ -138,8 +137,6 @@ public class StreamingService {
     private void loadMedia(){
         media.addAll(FileIO.readMedia("data/movies"));
         media.addAll(FileIO.readMedia("data/series"));
-            media.addAll(FileIO.readMedia("data/movies"));
-            media.addAll(FileIO.readMedia("data/series"));
     }
 }
 
