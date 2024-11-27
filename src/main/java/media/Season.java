@@ -21,6 +21,10 @@ public class Season{
             this.episodes.add(new Episode(episodes.get(i)));
         }
     }
+    public Season(int seasonNumber, Set<Episode> episodes) {
+        this.seasonNumber = seasonNumber;
+        this.episodes = episodes;
+    }
 
     public Set<Episode> getEpisodes() {
         return episodes;
