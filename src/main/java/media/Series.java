@@ -21,31 +21,31 @@ public class Series extends Media implements Playable {
 
     @Override
     public String getName() {
-        return "";
+        return getName();
     }
 
     @Override
     public float getRating() {
-        return 0;
+        return getRating();
     }
 
     @Override
     public int getReleaseYear() {
-        return 0;
+        return getReleaseYear();
     }
 
     @Override
     public Set<Enum> getCategories() {
-        return Set.of();
+        return getCategories();
     }
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        return equals(o);
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return hashCode();
     }
 }

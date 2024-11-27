@@ -76,6 +76,7 @@ public class User {
         return true;
     }
 
+
     public void removeSavedMedia(Media media){
         savedMedia.remove(media);
         System.out.println("You just removed " + media + " from the list");
