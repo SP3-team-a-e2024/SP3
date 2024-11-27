@@ -44,7 +44,7 @@ public class FileIO {
 
     //used for saving a user to the credentials
     //this will replace a user if they already exists with a new one
-    //remember to always check if theres a user already existing before usage
+    //remember to always check if there is a user already existing before usage
     public static void saveCredentials(String username, String password, String path) {
         //as it is file related, try catch
         try {
@@ -63,6 +63,7 @@ public class FileIO {
             }
             //finished writing
             writer.close();
+            writer.flush();
 
         }
         //if the file is not found
