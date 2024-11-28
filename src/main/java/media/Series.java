@@ -57,7 +57,7 @@ public class Series extends Media {
     //equals override
     @Override
     public boolean equals(Object o) {
-        //can only be the same if its the same class
+        //can only be the same if it's the same class
         if (!(o instanceof Series)) {
             return false;
         }
