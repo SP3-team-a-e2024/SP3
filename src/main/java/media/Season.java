@@ -29,7 +29,28 @@ public class Season{
     public Set<Episode> getEpisodes() {
         return episodes;
     }
+    public void addEpisodes(Set<Episode> episodes) {
+        this.episodes.addAll(episodes);
+    }
     public int getSeasonNumber() {
         return seasonNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Season)) {
+            return false;
+        }
+        Season other = (Season) o;
+        boolean episodesEqual = true;
+        for (Episode episode : episodes) {
+            for (Episode otherEpisode : other.episodes) {
+                if (episode.getEpisodeNumber() == otherEpisode.getEpisodeNumber()) {
+                    episodesEqual = false;
+                }
+            }
+        }
+        boolean seasonNumberEqual = seasonNumber == other.seasonNumber;
+        return episodesEqual && seasonNumberEqual;
     }
 }

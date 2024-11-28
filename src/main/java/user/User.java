@@ -1,6 +1,9 @@
 package user;
 
+import media.Episode;
 import media.Media;
+import media.Season;
+import media.Series;
 import util.TextUI;
 import java.util.HashSet;
 import java.util.Set;
@@ -62,6 +65,14 @@ public class User {
     }
 
     public void addWatchedMedia(Media media){
+        for (Media m : watchedMedia) {
+            if (media instanceof Series) {
+                if ((media).equals(m)){
+                    ((Series) m).addSeasons(((Series) media).getSeasons());
+                    return;
+                }
+            }
+        }
         watchedMedia.add(media);
     }
 
@@ -69,15 +80,16 @@ public class User {
         return savedMedia;
     }
 
-    public boolean addSavedMedia(Media media) {
-        if (savedMedia.contains(media)) {
-            TextUI.displayMsg(media.getTitle()+ " is already saved");
-            return false;
-        } else {
-            savedMedia.add(media);
-            TextUI.displayMsg(media.getTitle()+ " has been saved");
+    public void addSavedMedia(Media media) {
+        for (Media m : watchedMedia) {
+            if (media instanceof Series) {
+                if ((media).equals(m)){
+                    ((Series) m).addSeasons(((Series) media).getSeasons());
+                    return ;
+                }
+            }
         }
-        return true;
+        watchedMedia.add(media);
     }
 
     public void removeSavedMedia(Media media){

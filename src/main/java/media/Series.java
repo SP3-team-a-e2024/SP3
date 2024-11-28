@@ -31,6 +31,20 @@ public class Series extends Media {
         this.seasons = seasons;
     }
 
+    public void addSeasons(Set<Season> seasons) {
+        for (Season s : this.seasons) {
+            for (Season season : seasons) {
+                boolean alreadyExists = false;
+                if (season.getSeasonNumber() == s.getSeasonNumber()) {
+                    s.addEpisodes(season.getEpisodes());
+                    alreadyExists = true;
+                }
+                if (alreadyExists == false) {
+                    this.seasons.add(season);
+                }
+            }
+        }
+    }
     @Override
     public String getTitle() {
         return this.title;
@@ -67,8 +81,9 @@ public class Series extends Media {
         boolean isRatingEqual = this.rating == series.rating;
         boolean isReleaseYearEqual = this.releaseYear == series.releaseYear;
         boolean isCategoriesEqual = this.categories.equals(series.categories);
-        boolean isSeasonsEqual = this.seasons.equals(series.seasons);
-        return isNameEqual && isRatingEqual && isReleaseYearEqual && isCategoriesEqual && isSeasonsEqual;
+        //boolean isSeasonsEqual = this.seasons.equals(series.seasons);
+        //&& isSeasonsEqual
+        return isNameEqual && isRatingEqual && isReleaseYearEqual && isCategoriesEqual ;
     }
 
     //hashcode override
