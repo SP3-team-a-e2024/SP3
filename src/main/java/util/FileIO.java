@@ -169,10 +169,13 @@ public class FileIO {
         File file = new File(path);
         try{
             Scanner scan = new Scanner(file);
+            if (scan.hasNextLine()){
+                String line = scan.nextLine();
+            }
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
                 String[] lineSplitter = line.split(";");
-                if (lineSplitter[0].trim() == username) {
+                if (lineSplitter[0].trim().equals(username)) {
                     for(int i = 1; i < lineSplitter.length; i++){
                         String[] mediaArray = lineSplitter[i].split(",");
                         //if its longer than 1 its a series
@@ -182,12 +185,12 @@ public class FileIO {
                             for (int j = 1; j < mediaArray.length; j++) {
                                 String[] seasonArray = mediaArray[j].split("-");
                                 for (int k = 1; k < seasonArray.length; k++) {
-                                    episodes.add(Integer.parseInt(seasonArray[k]));
+                                    episodes.add(Integer.parseInt(seasonArray[k].trim()));
                                 }
-                                seasons.add(new Season(Integer.parseInt(seasonArray[0]),episodes));
+                                seasons.add(new Season(Integer.parseInt(seasonArray[0].trim()),episodes));
                             }
                             for (Media m : media) {
-                                if(m.getTitle() == mediaArray[0]) {
+                                if(m.getTitle().equals(mediaArray[0].trim())) {
                                     mediaSet.add(new Series(m.getTitle(),m.getRating(),m.getReleaseYear(),m.getCategories() ,seasons));
                                 }
                             }
@@ -195,7 +198,7 @@ public class FileIO {
                         //then its a movie
                         else {
                             for (Media m : media) {
-                                if(m.getTitle() == mediaArray[0]) {
+                                if(m.getTitle().equals(mediaArray[0].trim())) {
                                     mediaSet.add(m);
                                 }
                             }
@@ -214,13 +217,15 @@ public class FileIO {
         File file = new File(path);
         try {
             Scanner scan = new Scanner(file);
-            scan.nextLine();//header
+            if (scan.hasNextLine()) {
+                scan.nextLine();//header
+            }
             Writer writer = new FileWriter(file);
-            writer.write("username ; movies ; series , season-episode-episode ;");
+            writer.write("username ; movies ; series , season-episode-episode\n");
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
                 String[] lineSplitter = line.split(";");
-                if (username != lineSplitter[0].trim()) {
+                if (!username.equals(lineSplitter[0].trim())) {
                     writer.write(line + "\n");
                 }
             }
@@ -241,6 +246,7 @@ public class FileIO {
         }
         catch (FileNotFoundException e) {
             System.out.println("File was not found while saving media");
+
         }
         catch (IOException e) {
             System.out.println("something went wrong when writing to file");
