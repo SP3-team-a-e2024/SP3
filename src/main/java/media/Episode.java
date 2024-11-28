@@ -21,4 +21,13 @@ public class Episode implements Playable {
     public int getEpisodeNumber() {
         return episodeNumber;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Episode)) {
+            return false;
+        }
+        Episode other = (Episode) o;
+        return this.episodeNumber == other.episodeNumber;
+    }
 }
