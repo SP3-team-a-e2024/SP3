@@ -81,7 +81,7 @@ public class User {
     }
 
     public void addSavedMedia(Media media) {
-        for (Media m : watchedMedia) {
+        for (Media m : savedMedia) {
             if (media instanceof Series) {
                 if ((media).equals(m)){
                     ((Series) m).addSeasons(((Series) media).getSeasons());
@@ -89,7 +89,7 @@ public class User {
                 }
             }
         }
-        watchedMedia.add(media);
+        savedMedia.add(media);
     }
 
     public void removeSavedMedia(Media media){
