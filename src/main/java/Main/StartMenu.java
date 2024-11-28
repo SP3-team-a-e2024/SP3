@@ -25,7 +25,6 @@ public class StartMenu {
             case "Log in":
                 currentUser = login();
                 break;
-
             case "Sign up":
                 signUp();
                 break;
