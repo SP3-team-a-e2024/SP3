@@ -31,7 +31,10 @@ public class FileIO {
         }
         //if the file is not found
         catch (FileNotFoundException e) {
-            System.out.println("File was not found while reading user credentials");
+            if (fileIOExceptionHandler(e, path)) {
+                return readUserCredentials(path);
+            }
+            throw new RuntimeException(e);
         }
         return data;
     }
@@ -61,11 +64,15 @@ public class FileIO {
         }
         //if the file is not found
         catch (FileNotFoundException e) {
-            System.out.println("File was not found while saving credentials");
+            if (fileIOExceptionHandler(e, path)) {
+                saveCredentials(username, password, path);
+                return;
+            }
+            throw new RuntimeException(e);
         }
         //anything else
         catch (IOException e) {
-            System.out.println("something went wrong when writing to file");
+            TextUI.displayMsg("something went wrong when writing to file");
         }
     }
 
@@ -146,7 +153,10 @@ public class FileIO {
             //scanner has now gone through all of it
             scan.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Media file not found: " + path);
+            if (fileIOExceptionHandler(e, path)) {
+                return readMedia(path);
+            }
+            throw new RuntimeException(e);
         }
         //returns all of it
         return mediaSet;
@@ -208,7 +218,10 @@ public class FileIO {
             }
         }
         catch(FileNotFoundException e) {
-            System.out.println("File was not found while reading user credentials");
+            if (fileIOExceptionHandler(e, path)) {
+                return loadUserMedia(username, media, path);
+            }
+            throw new RuntimeException(e);
         }
         return mediaSet;
     }
@@ -245,11 +258,24 @@ public class FileIO {
             writer.close();
         }
         catch (FileNotFoundException e) {
-            System.out.println("File was not found while saving media");
-
+            fileIOExceptionHandler(e, path);
+            saveUserMedia(username, mediaSet, path);
         }
         catch (IOException e) {
-            System.out.println("something went wrong when writing to file");
+            TextUI.displayMsg("something went wrong when writing to file");
         }
+    }
+
+    private static boolean fileIOExceptionHandler(Exception exception, String path) {
+        if (exception instanceof FileNotFoundException) {
+            try {
+                File file = new File(path);
+                return file.createNewFile();
+            }
+            catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return false;
     }
 }
