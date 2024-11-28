@@ -65,6 +65,10 @@ public class MediaPlayer {
         media.playMedia();
         getUser().addWatchedMedia(mapEpisodeToMedia(getMedia()));
     }
+    private static void save(Playable media) {
+        getUser().addSavedMedia(mapEpisodeToMedia(getMedia()));
+
+    }
 
     private static void displaySeasonOptions(Series series) {
         List<String> options = new ArrayList<>();
@@ -118,7 +122,13 @@ public class MediaPlayer {
     private static void displayMediaOptions(Playable media) {
         List<String> options = new ArrayList<>();
         options.add("Play");
-        // TODO: Add option to save media
+        if (media instanceof Movie) {
+            options.add("Save movie");
+        }
+        else if (media instanceof Series) {
+            options.add("Save series");
+        }
+
         options.add("Cancel");
         options = TextUI.promptChoice(options, 1, "What do you want to do?");
         String userInput = options.get(0);
@@ -126,6 +136,10 @@ public class MediaPlayer {
         switch (userInput) {
             case "Play":
                 play(media);
+                break;
+            case "Save movie":
+            case "Save series":
+                save(media);
                 break;
             case "Cancel":
                 break;
