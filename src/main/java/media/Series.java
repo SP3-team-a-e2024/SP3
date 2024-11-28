@@ -81,8 +81,6 @@ public class Series extends Media {
         boolean isRatingEqual = this.rating == series.rating;
         boolean isReleaseYearEqual = this.releaseYear == series.releaseYear;
         boolean isCategoriesEqual = this.categories.equals(series.categories);
-        //boolean isSeasonsEqual = this.seasons.equals(series.seasons);
-        //&& isSeasonsEqual
         return isNameEqual && isRatingEqual && isReleaseYearEqual && isCategoriesEqual ;
     }
 
