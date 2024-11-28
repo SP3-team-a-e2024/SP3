@@ -41,7 +41,7 @@ public class StreamingService {
         }
 
         for (Media m : media) {
-            if (m.getTitle().contains(mediaName)) {
+            if (m.getTitle().toLowerCase().contains(mediaName.toLowerCase())) {
                 result.add(m);
             }
         }
